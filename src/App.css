@@ -31,3 +31,26 @@
     transform: rotate(360deg);
   }
 }
+
+.name {
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: 'Reem Kufi', sans-serif;
+  float: left;
+  margin-left: 12%;
+}
+
+.pic {
+  max-width: 30%;
+  float: right;
+  margin-right: 12%;
+}
+
+.contact {
+  clear: both;
+}
+
+* {
+  font-family: 'Abel', sans-serif;
+  font-size: 1.5rem;
+}
