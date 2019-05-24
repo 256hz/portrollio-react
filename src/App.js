@@ -50,7 +50,7 @@ class App extends Component {
       <div className="App">
         <Nav />
         <div>
-          <Name /> <Pic />
+          <NamePic />
         </div>
         <div>
           <Editor />
