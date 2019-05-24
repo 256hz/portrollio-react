@@ -8,7 +8,8 @@ const NamePic = (props) => {
             <div className='two column row'>   
                <div className="column middle aligned">
                   <div className="row">Hello, my name is </div>
-                  <div className="name">Namey Namerson</div>
+                  <div className="row name">{props.user.first_name} {props.user.last_name}</div>
+                  <div className="row ">{props.user.intro}</div>
                </div>
                <div className='column middle aligned'>
                   <img className="image-circle"

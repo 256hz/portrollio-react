@@ -9,6 +9,12 @@
   background-color: #EEE;
 }
 
+.heading {
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: 'Reem Kufi', sans-serif;
+}
+
 .image-circle {
   border-radius: 50%;
   width: 600px;
