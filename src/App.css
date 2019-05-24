@@ -1,13 +1,36 @@
+@linkHoverColor: #0000FF;
+
 .App {
   text-align: center;
 }
 
 
+.grayBG {
+  background-color: #EEE;
+}
+
+.heading {
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: 'Reem Kufi', sans-serif;
+}
+
+.image-circle {
+  border-radius: 50%;
+  width: 600px;
+  height: 600px;
+}
+
 .name {
   font-size: 4rem;
   font-weight: bold;
   font-family: 'Reem Kufi', sans-serif;
-  margin-left: 12%;
+}
+
+.right-padded {
+  padding: 1% 15% 0% 0%;
+  margin-top: 1%;
+
 }
 
 * {

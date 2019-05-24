@@ -1,21 +1,24 @@
 import React from 'react'
 
 
-const Name = () => {
+const NamePic = (props) => {
 
     return(
-         <div className="ui grid">
+         <div className="ui grid grayBG">
             <div className='two column row'>   
-               <div className="name middle aligned column">
-                  Namey Namerson
+               <div className="column middle aligned">
+                  <div className="row">Hello, my name is </div>
+                  <div className="row name">{props.user.first_name} {props.user.last_name}</div>
+                  <div className="row ">{props.user.intro}</div>
                </div>
-               <div className='middle aligned column'>
-                  <img src="http://4.bp.blogspot.com/-gBShNV-VyoI/TuoQOhCE1dI/AAAAAAAACXc/tp9YZ_Rpn9Q/s1600/memes+en+hd8.jpg"
-                        alt="guy"></img>
+               <div className='column middle aligned'>
+                  <img className="image-circle"
+                       src="http://4.bp.blogspot.com/-gBShNV-VyoI/TuoQOhCE1dI/AAAAAAAACXc/tp9YZ_Rpn9Q/s1600/memes+en+hd8.jpg"
+                       alt="guy"></img>
                </div>            
             </div>
          </div>
         )
 }
 
-export default Name
+export default NamePic
