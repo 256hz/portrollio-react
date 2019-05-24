@@ -5,6 +5,7 @@ import NamePic from './components/NamePic'
 import Contact from './components/Contact'
 import Editor from './components/Editor'
 import Jobs from './components/Jobs'
+import Githubs from './components/Githubs'
 import BioIntro from './components/BioIntro'
 
 const apiURL = 'http://localhost:3000/api/v1/'
@@ -16,6 +17,7 @@ const DEFAULT_STATE = {
   jobs: [],
   links: [],
   skills: [],
+  githubs: [],
   users: [],
   currentUser: {
   }
@@ -67,6 +69,11 @@ class App extends Component {
         <div className="one column row">
           <div className="column">
             <Jobs jobs={this.state.jobs}/>
+          </div>
+        </div>
+        <div className="one column row">
+          <div className="column">
+            <Githubs githubs={this.state.githubs}/>
           </div>
         </div>
         <div className="one column row">

@@ -9,8 +9,9 @@ const NamePic = (props) => {
                <div className="column middle aligned">
                   <div className="one wide column">{' '}</div> {/* spacer - is there a better way?*/}
                   <div className="row"><div className="one wide column">Hello, my name is </div></div>
-                  <div className="row"><div className="one wide column">{' '}</div></div>
+                  <div className="row"><div className="one wide column">{'.'}</div></div>
                   <div className="row name">{props.user.first_name} {props.user.last_name}</div>
+                  <div className="row"><div className="one wide column">{'.'}</div></div>
                   <div className="row">{props.user.intro}</div>
                </div>
                <div className='column middle aligned'>
