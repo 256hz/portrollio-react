@@ -9,11 +9,11 @@ const BioIntro = (props) => {
       </div>
       <br></br>
       <div className="ui grid">
-        <div className="four wide column">{ }</div>
+        <div className="four wide column">{' '}</div>
         <div className="eight wide column">
           {props.user.bio}
         </div>
-        <div className="four wide column">{ }</div>
+        <div className="four wide column">{' '}</div>
       </div>
     </div>
   )
