@@ -13,11 +13,11 @@ const Jobs = (props) => {
           <div class="column">
             <h2 class="ui header" style={styles}>{job.title}</h2> - <h3 class="ui header" style={styles}>{job.company}</h3>
             <h4 class="ui header">{job.start_month} {job.start_year} - {job.end_month} {job.end_year}</h4>
-            <p class="ui paragraph">{job.summary}</p>
+            <p class="font_size_medium">{job.summary}</p>
             <div class="ui bulleted list ">
               {
                 job.responsibilities.map(res => {
-                  return <div class="item">{res}</div>
+                  return <div class="item font_size_small">{res}</div>
                 })
               }
             </div>
