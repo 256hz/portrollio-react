@@ -4,6 +4,7 @@ import Nav from './components/Nav'
 import NamePic from './components/NamePic'
 import Contact from './components/Contact'
 import Editor from './components/Editor'
+import Jobs from './components/Jobs'
 const apiURL = 'http://localhost:3000/api/v1/'
 
 class App extends Component {
@@ -52,6 +53,9 @@ class App extends Component {
         <Nav />
         <div>
           <NamePic />
+        </div>
+        <div>
+          <Jobs jobs={this.state.jobs}/>
         </div>
         <div>
           <Editor />
