@@ -4,7 +4,9 @@ import Nav from './components/Nav'
 import NamePic from './components/NamePic'
 import Contact from './components/Contact'
 import Editor from './components/Editor'
+import Jobs from './components/Jobs'
 import BioIntro from './components/BioIntro'
+
 const apiURL = 'http://localhost:3000/api/v1/'
 // as long as we keep users & currentUser at the end, we can add states
 // to this list and it will automatically fetch them
@@ -48,9 +50,12 @@ class App extends Component {
     return (
       <div className="App">
         <Nav />
+
           <NamePic user={this.state.currentUser}/>
           <BioIntro user={this.state.currentUser}/>
+          <Jobs jobs={this.state.jobs}/>
           <Editor user={this.state.currentUser}/>
+
           <Contact user={this.state.currentUser}/>
       </div>
     );
