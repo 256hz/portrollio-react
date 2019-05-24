@@ -9,7 +9,7 @@ const parsePhoneNum = (num) => {
 const Contact = (props) => {
 
     return (
-        <div className="">
+        <div className="centered">
             <span className="contact">
               <a href={"mailto:"+props.user.email}>{props.user.email}</a>
             </span>
