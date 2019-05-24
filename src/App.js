@@ -4,58 +4,54 @@ import Nav from './components/Nav'
 import NamePic from './components/NamePic'
 import Contact from './components/Contact'
 import Editor from './components/Editor'
+import BioIntro from './components/BioIntro'
 const apiURL = 'http://localhost:3000/api/v1/'
+// as long as we keep users & currentUser at the end, we can add states
+// to this list and it will automatically fetch them
+const DEFAULT_STATE = {
+  honors: [],
+  interests: [],
+  jobs: [],
+  links: [],
+  skills: [],
+  users: [],
+  currentUser: {
+    // first_name: "", last_name: "", email: "", phone: "", intro: "", bio: ""
+  }
+}
 
 class App extends Component {
   constructor() {
     super()
-    this.state = {
-      honors: [],
-      interests: [],
-      jobs: [],
-      links: [],
-      skills: [],
-      users: [],
-      currentUser: {}
-    }
+    this.state = DEFAULT_STATE
   }
 
   componentDidMount() {
-    fetch(apiURL+'honors')
-    .then(res => res.json())
-    .then(honors => this.setState({honors}))
+    let fetches = Object.keys(DEFAULT_STATE) // keys of the default state are the api pathnames
+    fetches.pop(2) //so it doesn't try to fetch users & currentUser
 
-    fetch(apiURL+'interests')
-    .then(res => res.json())
-    .then(interests => this.setState({interests}))
+    fetches.forEach( f => {
+      fetch( apiURL + f )
+      .then( res => res.json() )
+      .then( json => this.setState({[f]: json}))
+    })
 
-    fetch(apiURL+'jobs')
-    .then(res => res.json())
-    .then(jobs => this.setState({jobs}))
-
-    fetch(apiURL+'links')
-    .then(res => res.json())
-    .then(links => this.setState({links}))
-
-    fetch(apiURL+'skills')
-    .then(res => res.json())
-    .then(skills => this.setState({skills}))
-
-    fetch(apiURL+'users')
-    .then(res => res.json())
-    .then(users => this.setState({users, currentUser: users[0]}))
+    fetch( apiURL + 'users')
+    .then( res => res.json() )
+    .then( users => {
+      this.setState({users})
+      this.setState({currentUser: users[0]})
+    })
+    
   }
 
   render() {
     return (
       <div className="App">
         <Nav />
-        <div>
-          <NamePic />
-        </div>
-        <div>
-          <Editor />
-        </div>
+          <NamePic user={this.state.currentUser}/>
+          <BioIntro user={this.state.currentUser}/>
+          <Editor user={this.state.currentUser}/>
           <Contact user={this.state.currentUser}/>
       </div>
     );
