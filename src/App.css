@@ -27,6 +27,14 @@
   font-size: 4rem;
 }
 
+.font_size_small{
+  font-size: 18px;
+}
+
+.font_size_medium{
+  font-size: 22px;
+}
+
 .right-padded {
   padding: 1% 15% 0% 0%;
   margin-top: 1%;
