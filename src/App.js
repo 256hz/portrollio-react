@@ -31,7 +31,7 @@ class App extends Component {
 
   componentDidMount() {
     let fetches = Object.keys(DEFAULT_STATE) // keys of the default state are the api pathnames
-    fetches.pop(2) //so it doesn't try to fetch users & currentUser
+    fetches.pop(2) //take off the last 2 so it doesn't try to fetch users & currentUser
 
     fetches.forEach( f => {
       fetch( apiURL + f )
