@@ -2,27 +2,6 @@
   text-align: center;
 }
 
-.contact {
-  border: .5px dotted red;
-}
-
-.contactItem {
-  margin: 10px;
-  column-fill: auto;
-  clear: both;
-}
-
-.editor {
-  background-color: darkcyan;
-  left: 250px;
-  float:right;
-}
-
-.pic {
-  max-width: 30%;
-  float: right;
-  margin-right: 12%;
-}
 
 .name {
   font-size: 4rem;
@@ -31,22 +10,6 @@
   float: left;
   clear: both;
   margin-left: 12%;
-}
-
-.nav {
-  float:right;
-  margin-right: 20%;
-  display: flex;
-  clear: both;
-  background-color: rgba(20, 20, 20, .05);
-  border: .5px dotted red;
-}
-
-.navButton {
-  margin: 10px;
-  display: flex;
-  column-fill: auto;
-  clear: both;
 }
 
 * {
