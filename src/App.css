@@ -10,6 +10,7 @@
 
 .heading {
   text-align: center;
+  font-size: 3rem;
   font-family: 'Reem Kufi', sans-serif;
 }
 
@@ -23,6 +24,7 @@
 .name {
   text-align: center;
   font-family: 'Reem Kufi', sans-serif;
+  font-size: 4rem;
 }
 
 .right-padded {

@@ -7,8 +7,9 @@ const NamePic = (props) => {
          <div className="ui grid grayBG">
             <div className='two column row'>   
                <div className="column middle aligned">
-                  <div className="one wide column">{ }</div> {/* spacer - is there a better way?*/}
-                  <div className="row">Hello, my name is </div>
+                  <div className="one wide column">{' '}</div> {/* spacer - is there a better way?*/}
+                  <div className="row"><div className="one wide column">Hello, my name is </div></div>
+                  <div className="row"><div className="one wide column">{' '}</div></div>
                   <div className="row name">{props.user.first_name} {props.user.last_name}</div>
                   <div className="row">{props.user.intro}</div>
                </div>
