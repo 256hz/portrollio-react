@@ -14,7 +14,8 @@ class App extends Component {
       interests: [],
       jobs: [],
       links: [],
-      skills: []
+      skills: [],
+      users: []
     }
   }
 
@@ -39,6 +40,9 @@ class App extends Component {
     .then(res => res.json())
     .then(skills => this.setState({skills}))
 
+    fetch(apiURL+'users')
+    .then(res => res.json())
+    .then(users => this.setState({users}))
   }
 
   render() {
