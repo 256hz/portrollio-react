@@ -11,6 +11,7 @@ const Nav = (props) => {
                 <a className="item" href="/#interests">Interests</a>
                 <a className="item" href="/#honors">Honors</a>
                 <a className="item" href="/#links">Links</a>
+                <a className="item" onClick={props.handleEdit}>Edit</a>
             </div>
         </div>
     </div>
