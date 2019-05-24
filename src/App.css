@@ -2,32 +2,54 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.contact {
+  border: .5px dotted red;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.contactItem {
+  margin: 10px;
+  column-fill: auto;
+  clear: both;
+}
+
+.editor {
+  background-color: darkcyan;
+  left: 250px;
+  float:right;
+}
+
+.pic {
+  max-width: 30%;
+  float: right;
+  margin-right: 12%;
+}
+
+.name {
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: 'Reem Kufi', sans-serif;
+  float: left;
+  clear: both;
+  margin-left: 12%;
+}
+
+.nav {
+  float:right;
+  margin-right: 20%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  clear: both;
+  background-color: rgba(20, 20, 20, .05);
+  border: .5px dotted red;
 }
 
-.App-link {
-  color: #61dafb;
+.navButton {
+  margin: 10px;
+  display: flex;
+  column-fill: auto;
+  clear: both;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+* {
+  font-family: 'Abel', sans-serif;
+  font-size: 1.5rem;
 }
