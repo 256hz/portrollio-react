@@ -1,6 +1,6 @@
 
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 
@@ -9,16 +9,19 @@
 }
 
 .heading {
+  text-align: center;
   font-family: 'Reem Kufi', sans-serif;
 }
 
 .image-circle {
   border-radius: 50%;
+  border: 1px solid teal;
   width: 600px;
   height: 600px;
 }
 
 .name {
+  text-align: center;
   font-family: 'Reem Kufi', sans-serif;
 }
 

@@ -48,33 +48,41 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Nav />
+      <div className="App ui grid">
+        <div className="one column row">
+          <div className="column">
+            <Nav />
+          </div>
+        </div>
+        <div className="one column row">
+          <div className="column">
+            <NamePic user={this.state.currentUser}/>
+          </div>
+        </div>
+        <div className="one column row">
+          <div className="column">
+            <BioIntro user={this.state.currentUser}/>
+          </div>
+        </div>
+        <div className="one column row">
+          <div className="column">
+            <Jobs jobs={this.state.jobs}/>
+          </div>
+        </div>
+        <div className="one column row">
+          <div className="column">
+            <Editor user={this.state.currentUser}/>
+          </div>
+        </div>
+        <div className="one column row">
+          <div className="column">
+            <Contact user={this.state.currentUser}/>
+          </div>
+        </div>
 
-          <NamePic user={this.state.currentUser}/>
-          <BioIntro user={this.state.currentUser}/>
-          <Jobs jobs={this.state.jobs}/>
-          <Editor user={this.state.currentUser}/>
-
-          <Contact user={this.state.currentUser}/>
       </div>
     );
   }
 }
 
 export default App;
-//import logo from './logo.svg';
-/* <header className="App-header">
-  <img src={logo} className="App-logo" alt="logo" />
-  <p>
-    Edit <code>src/App.js</code> and save to reload.
-  </p>
-  <a
-    className="App-link"
-    href="https://reactjs.org"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Learn React
-  </a>
-</header> */
