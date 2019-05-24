@@ -3,11 +3,11 @@ import React from 'react'
 const Contact = () => {
 
     return (
-        <div className="contact ui grid">
-            <div className="four wide column">email</div>
-            <div className="four wide column">phone</div>
-            <div className="four wide column">phone2</div>
-            <div className="four wide column">address</div>
+        <div className="">
+            <span className="contact">email</span>
+            <span className="contact">phone</span>
+            <span className="contact">phone2</span>
+            <span className="contact">address</span>
         </div>
         )
 }

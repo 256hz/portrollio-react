@@ -4,13 +4,17 @@ import Nav from './components/Nav'
 import Name from './components/Name'
 import Pic from './components/Pic'
 import Contact from './components/Contact'
+import Editor from './components/Editor'
 
 function App() {
   return (
     <div className="App">
       <Nav />
       <div>
-        <Name /> <Pic />
+        <Name /> <Pic /> 
+      </div>
+      <div>
+        <Editor />
       </div>
         <Contact />
     </div>
