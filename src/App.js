@@ -15,7 +15,8 @@ class App extends Component {
       jobs: [],
       links: [],
       skills: [],
-      users: []
+      users: [],
+      currentUser: {}
     }
   }
 
@@ -42,7 +43,7 @@ class App extends Component {
 
     fetch(apiURL+'users')
     .then(res => res.json())
-    .then(users => this.setState({users}))
+    .then(users => this.setState({users, currentUser: users[0]}))
   }
 
   render() {
@@ -50,12 +51,12 @@ class App extends Component {
       <div className="App">
         <Nav />
         <div>
-          <Name /> <Pic />
+          <NamePic />
         </div>
         <div>
           <Editor />
         </div>
-          <Contact />
+          <Contact user={this.state.currentUser}/>
       </div>
     );
   }
