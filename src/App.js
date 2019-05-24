@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import Nav from './components/Nav'
-import Name from './components/Name'
-import Pic from './components/Pic'
+import NamePic from './components/NamePic'
 import Contact from './components/Contact'
 import Editor from './components/Editor'
 
@@ -11,7 +10,7 @@ function App() {
     <div className="App">
       <Nav />
       <div>
-        <Name /> <Pic /> 
+        <NamePic /> 
       </div>
       <div>
         <Editor />
