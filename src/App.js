@@ -16,7 +16,6 @@ const DEFAULT_STATE = {
   skills: [],
   users: [],
   currentUser: {
-    // first_name: "", last_name: "", email: "", phone: "", intro: "", bio: ""
   }
 }
 
