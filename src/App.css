@@ -3,7 +3,6 @@
   /* text-align: center; */
 }
 
-
 .grayBG {
   background-color: #EEE;
 }
@@ -93,8 +92,12 @@ img {
 }
 
 .right-padded {
-  padding: 1% 15% 0% 0%;
-  margin-top: 1%;
+  padding: 0% 5% 0% 0%;
+  margin-top: 0%;
+}
+
+.wide {
+  width: 100%;
 }
 
 * {
