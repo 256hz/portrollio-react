@@ -32,6 +32,10 @@ img {
   max-width: 100%;
 }
 
+.centered {
+  text-align: center;
+}
+
 .side-crop {
   width: 60px;
   height: 60px;

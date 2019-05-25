@@ -8,6 +8,7 @@ const BioIntro = (props) => {
       <div className="column heading">
         About Me
       </div>
+      <br></br>
       <div className="ui grid">
         <div className="sixteen wide column"></div>
         <div className="four wide column">{' '}</div>
