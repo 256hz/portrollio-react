@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BioIntro = (props) => {
+const AboutMe = (props) => {
 
   return (
     <div className="">
@@ -21,4 +21,4 @@ const BioIntro = (props) => {
   )
 }
 
-export default BioIntro
+export default AboutMe

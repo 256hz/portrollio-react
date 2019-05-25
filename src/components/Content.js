@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import Nav from './Nav'
-import NamePic from './NamePic'
+import NamePicIntro from './NamePicIntro'
+import AboutMe from './AboutMe'
 import Contact from './Contact'
 import Jobs from './Jobs'
-import BioIntro from './BioIntro'
-import { Segment, Sidebar } from 'semantic-ui-react'
 
 const apiURL = 'http://localhost:3000/api/v1/'
 // as long as we keep users & currentUser at the end, we can add states
@@ -54,12 +53,12 @@ class Content extends Component {
         </div>
         <div className="one column row">
           <div className="column">
-            <NamePic user={this.state.currentUser}/>
+            <NamePicIntro user={this.state.currentUser}/>
           </div>
         </div>
+            <AboutMe user={this.state.currentUser}/>
         <div className="one column row">
           <div className="column">
-            <BioIntro user={this.state.currentUser}/>
           </div>
         </div>
         <div className="one column row">
