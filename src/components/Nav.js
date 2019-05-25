@@ -1,9 +1,7 @@
 import React from 'react'
 
 const Nav = (props) => {
-
     return (
-    <div className="ui header grayBG">
         <div className="ui secondary menu">
             <div className="right menu right-padded">
                 <a className="item" href="/#jobs">Jobs</a>
@@ -14,7 +12,6 @@ const Nav = (props) => {
                 <a className="item" onClick={props.handleEdit}>Edit</a>
             </div>
         </div>
-    </div>
     )
 }
 

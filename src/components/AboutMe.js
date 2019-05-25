@@ -1,23 +1,26 @@
 import React from 'react'
+import { Grid } from 'semantic-ui-react'
 
 const AboutMe = (props) => {
 
   return (
-    <div className="">
+    <Grid divided='vertically'>
     
-      <div className="column heading">
-        About Me
-      </div>
-      <br></br>
-      <div className="ui grid">
-        <div className="sixteen wide column"></div>
-        <div className="four wide column">{' '}</div>
-        <div className="eight wide column">
+      <Grid.Row columns={1}>
+        <Grid.Column className="heading">
+          <br />
+          About Me
+        </Grid.Column>
+      </Grid.Row>
+      <br />
+      <Grid.Row columns={16}>
+        <Grid.Column width={4}>{' '}</Grid.Column>
+        <Grid.Column width={8}>
           {props.user.bio}
-        </div>
-        <div className="four wide column">{' '}</div>
-      </div>
-    </div>
+        </Grid.Column>
+        <Grid.Column width={4}>{' '}</Grid.Column>
+      </Grid.Row>
+    </Grid>
   )
 }
 
