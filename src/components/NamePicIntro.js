@@ -1,16 +1,14 @@
 import React from 'react'
 
 
-const NamePic = (props) => {
+const NamePicIntro = (props) => {
 
    return(
       <div className="ui grid grayBG">
          <div className='two column row'>   
             <div className="column middle aligned">
                <div className="four column row">
-                  <div className="one wide column">x</div>
                   <div className="two wide column">Hello, my name is </div>
-                  <div className="one wide column">x</div>
                </div>
                <div className="one column row">
                   <div className="column">{props.user.first_name} {props.user.last_name}</div>
@@ -28,4 +26,4 @@ const NamePic = (props) => {
    )
 }
 
-export default NamePic
+export default NamePicIntro
