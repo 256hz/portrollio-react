@@ -11,8 +11,8 @@ const Githubs = (props) => {
         {props.githubs.map(github => {
           let fancy_name = github.repo_name.split('-').map( word => word[0].toUpperCase() + word.slice(1)).join(" ")
           return(
-              <div className="ui fluid card">
-                <div className="content">
+              <div className="ui card">
+                <div className="content middle aligned">
                   <img className="right floated mini ui image" src={github.img_url} />
                   <div className="header">
                     {fancy_name}
