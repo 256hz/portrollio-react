@@ -1,9 +1,5 @@
 import React from 'react'
 
-let styles={
-  display: 'inline'
-}
-
 const Githubs = (props) => {
   return(
     <div className="ui four column doubling stackable grid container">  
@@ -13,7 +9,7 @@ const Githubs = (props) => {
           return(
               <div className="ui card">
                 <div className="content middle aligned">
-                  <img className="right floated mini ui image" src={github.img_url} />
+                  <img className="right floated mini ui image" src={github.img_url} alt={fancy_name}/>
                   <div className="header">
                     {fancy_name}
                   </div>
@@ -33,6 +29,10 @@ const Githubs = (props) => {
 }
     
 export default Githubs
+// let styles={
+//   display: 'inline'
+// }
+
     
     // <div class="ui three column doubling stackable grid container">
           // <div className="">
