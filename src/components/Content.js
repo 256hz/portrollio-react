@@ -4,6 +4,11 @@ import NamePicIntro from './NamePicIntro'
 import AboutMe from './AboutMe'
 import Contact from './Contact'
 import Jobs from './Jobs'
+import Githubs from './Githubs'
+import Skills from './Skills'
+import Interests from './Interests'
+import Honors from './Honors'
+import Links from './Links'
 import { Grid } from 'semantic-ui-react'
 
 const apiURL = 'http://localhost:3000/api/v1/'
@@ -12,17 +17,21 @@ const apiURL = 'http://localhost:3000/api/v1/'
  // to this list and it will automatically fetch them
  // as long as we keep users & currentUser at the end, we can add states
  const DEFAULT_STATE = {
-   honors: [],
-   interests: [],
-   jobs: [],
-   links: [],
-   skills: [],
-   users: [],
-   currentUser: {
-  }
+  jobs: [],
+  githubs: [],
+  interests: [],
+  skills: [],
+  honors: [],
+  links: [],
+  users: [],
+  currentUser: {},
+  visible: []
 }
+
 let keys = Object.keys(DEFAULT_STATE)
-let anchors = keys.slice(0, keys.length-2)
+let anchors = keys.slice(0, keys.length-3)
+// used to automate fetch -- users, currentUser & visible are not 
+// fetched automatically so they are excluded. 
 
 class Content extends Component {
   constructor() {
@@ -31,13 +40,14 @@ class Content extends Component {
   }
 
   componentDidMount() {
-
+    //automated fetch
     anchors.forEach( f => {
       fetch( apiURL + f )
       .then( res => res.json() )
       .then( json => this.setState({[f]: json}))
     })
 
+    //special fetch for users
     fetch( apiURL + 'users')
     .then( res => res.json() )
     .then( users => {
@@ -49,34 +59,60 @@ class Content extends Component {
   render() {
     return (
       <Grid className="App ui">
+
         <Grid.Row className="grayBG">
           <Grid.Column>
-            <Nav handleEdit={this.props.handleEdit}/>
+            <Nav />
           </Grid.Column>
         </Grid.Row>
+
         <Grid.Row>
           <Grid.Column>
             <NamePicIntro user={this.state.currentUser}/>
           </Grid.Column>
         </Grid.Row>
+
         <Grid.Row className="">
           <Grid.Column>
             <AboutMe user={this.state.currentUser}/>
           </Grid.Column>
         </Grid.Row>
+
         <Grid.Row className="grayBG">
           <Grid.Column>
             <Jobs jobs={this.state.jobs}/>
           </Grid.Column>
         </Grid.Row>
+
+        <Grid.Row className="">
+          <Grid.Column>
+            <Githubs githubs={this.state.githubs}/>
+          </Grid.Column>
+        </Grid.Row>
+
         <Grid.Row>
           <Grid.Column>
             <Contact user={this.state.currentUser}/>
           </Grid.Column>
         </Grid.Row>
+
       </Grid>
     );
   }
 }
 
 export default Content;
+
+
+        // visible: [
+        //   <Nav user={this.state.currentUser} />, 
+        //   <NamePicIntro user={this.state.currentUser} />,
+        //   <AboutMe user={this.state.currentUser} />, 
+        //   <Jobs jobs={this.state.jobs} />, 
+        //   <Githubs githubs={this.state.githubs} />, 
+        //   <Interests interests={this.state.interests}/>, 
+        //   <Skills skills={this.state.skills} />, 
+        //   <Honors honors={this.state.honors} />, 
+        //   <Links links={this.state.links} />,
+        //   <Contact user={this.state.currentUser} />,
+        // ]  

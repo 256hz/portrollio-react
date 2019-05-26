@@ -1,45 +1,56 @@
 import React from 'react'
+import { Grid, List } from 'semantic-ui-react';
 
 const Jobs = (props) => {
 
   return(
-    <div className="grayBG">
-    <br></br>
-      <div className="column heading">
-        Jobs
-      </div>
-      <br></br>
-      <br></br>
-      <div className="ui four column doubling stackable grid container">
+    <Grid divided="vertically" padded="horizontally">
+
+      <Grid.Row>
+        <Grid.Column className="heading">
+          <br />
+          Jobs
+        </Grid.Column>
+      </Grid.Row>
+
+      <Grid.Row columns={props.jobs.length} padded="horizontally">
         {props.jobs.map(job => {
+          let imgStyle = {
+            className: "image-circle-small-img",
+            backgroundImage: `url(${job.img_url})`
+          }
           return(
-            <div key={job.title} className="column">
-              <div>
+            <Grid.Column key={job.title}>
+
+              <Grid.Row>
                 <div className="image-circle-small">
-                  <img className="image-circle-small-img" src={job.img_url} alt={job.company} />
+                  <div style={imgStyle}/>
                 </div>
                 <div className="company-logo-name-container">
                   <h2 className="ui header">{job.title}</h2>
                   <h3 className="ui header">{job.company}</h3>
                 </div>
-              </div>
+              </Grid.Row>
+
               <h4 className="ui header">
                 {job.start_month} {job.start_year} - {job.end_month}
                 {' '}{job.end_year ? job.end_year : 'Present'}
               </h4>
+
               <p className="font_size_medium ui paragraph">{job.summary}</p>
-              <div className="ui bulleted list ">
+              <List bulleted>
                 {
                   job.responsibilities.map(res => {
-                    return <div key={res} className="item font_size_small">{res}</div>
+                    return <List.Item key={res} className="font_size_small">{res}</List.Item>
                   })
                 }
-              </div>
-            </div>
+              </List>
+
+            </Grid.Column>
           )}
         )}
-      </div>
-    </div>
+        </Grid.Row>
+    </Grid>
   )
 }
 
