@@ -1,3 +1,4 @@
+/* All entries alphabetical, except body and * at the bottom */
 
 .App {
   /* text-align: center; */
@@ -33,19 +34,48 @@
   font-size: 42px;
 }
 
-.grayBG {
-  background-color: #EEE;
+.grayBG:before {
+  /* background-color: #EEE; */
+  content: "";
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: deepskyblue;
+  background-image: url(/images/light_noise_diagonal_@2X.png) green;
+  opacity: 0.4;
+}
+
+.grayBG:after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(10%) invert(10%);
+  background-image: linear-gradient(to bottom, deepskyblue, transparent 70%);
+  background-image: url(/images/light_noise_diagonal_@2X.png) green;
 }
 
 .heading {
-  font-family: 'Reem Kufi', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  vertical-align: top;
+  background: linear-gradient(90deg, rgba(0,191,255,0.25) 0%, rgba(255,255,255,0) 100%);
 }
 
 .image-circle-portrait {
   border-radius: 50%;
   border: 1px solid teal;
-  width: 600px;
-  height: 600px;
+  max-width: 500px;
+  max-height: 500px;
+  min-width: 500px;
+  min-height: 500px;
 }
 
 .image-circle-small-job {
@@ -128,6 +158,21 @@ img {
 
 .wide {
   width: 100%;
+}
+
+.colorBG:before {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  backface-visibility: hidden;
+  /* background-image: url(http://localhost:3000/images/light_noise_diagonal_@2X.png) deepskyblue; */
+  background-color: deepskyblue;
+  opacity: 0.4;
+  filter: grayscale(100%) invert(100%);
 }
 
 * {

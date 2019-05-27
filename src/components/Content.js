@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { anchorate } from 'anchorate'
+import { createHistory } from 'history'
 import Nav from './Nav'
 import NamePicIntro from './NamePicIntro'
 import AboutMe from './AboutMe'
@@ -12,11 +15,7 @@ import Links from './Links'
 import { Grid } from 'semantic-ui-react'
 
 const apiURL = 'http://localhost:3000/api/v1/'
- // keys of the default state are the api pathnames
- // anchors.pop(2) //so it doesn't try to fetch users & currentUser
- // to this list and it will automatically fetch them
- // as long as we keep users & currentUser at the end, we can add states
- const DEFAULT_STATE = {
+const DEFAULT_STATE = {
   jobs: [],
   githubs: [],
   interests: [],
@@ -31,7 +30,8 @@ const apiURL = 'http://localhost:3000/api/v1/'
 let keys = Object.keys(DEFAULT_STATE)
 let anchors = keys.slice(0, keys.length-3)
 // used to automate fetch -- users, currentUser & visible are not 
-// fetched automatically so they are excluded. 
+// fetched automatically so they are excluded (length-3). We can
+// add resources as long as they are before the final 3 in the list. 
 
 class Content extends Component {
   constructor() {
@@ -60,13 +60,13 @@ class Content extends Component {
     return (
       <Grid className="">
 
-        <Grid.Row className="grayBG">
+        <Grid.Row className="">
           <Grid.Column>
-            <Nav />
+            <Nav handleEdit={this.props.handleEdit}/>
           </Grid.Column>
         </Grid.Row>
 
-        <Grid.Row className>
+        <Grid.Row className="">
           <Grid.Column>
             <NamePicIntro user={this.state.currentUser}/>
           </Grid.Column>
@@ -79,7 +79,7 @@ class Content extends Component {
           </Grid.Column>
         </Grid.Row>
 
-        <Grid.Row className="grayBG">
+        <Grid.Row className="">
           <Grid.Column>
             <Jobs jobs={this.state.jobs}/>
           </Grid.Column>
@@ -91,7 +91,7 @@ class Content extends Component {
           </Grid.Column>
         </Grid.Row>
 
-        <Grid.Row>
+        <Grid.Row className="">
           <Grid.Column>
             <Contact user={this.state.currentUser}/>
           </Grid.Column>

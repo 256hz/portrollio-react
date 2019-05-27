@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Icon, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import Content from './components/Content'
 
 class App extends React.Component {
@@ -25,6 +25,10 @@ class App extends React.Component {
                visible={this.state.visible}
                width='wide'
              >
+               <Menu.Item as='a' onClick={this.handleEdit}>
+                 <Icon name='cancel' size="mini"/>
+                 Close
+               </Menu.Item>
                <Menu.Item as='a'>
                  <Icon name='home' />
                  Home
@@ -33,14 +37,12 @@ class App extends React.Component {
                  <Icon name='gamepad' />
                  Games
                </Menu.Item>
-               <Menu.Item as='a'>
-                 <Icon name='camera' />
-                 Channels
-               </Menu.Item>
              </Sidebar>
              <Sidebar.Pusher dimmed={false}>
-              <Segment basic>
+              <Segment basic className="grayBG">
+
                 <Content handleEdit={this.handleEdit}/>
+              
               </Segment>
             </Sidebar.Pusher>
           </Sidebar.Pushable>

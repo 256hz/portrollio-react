@@ -1,18 +1,17 @@
 import React from 'react'
+import {Menu, Icon} from "semantic-ui-react"
 
 const Nav = (props) => {
-    return (
-        <div className="ui secondary menu">
-            <div className="right menu right-padded">
-                <a className="item" href="/#jobs">Jobs</a>
-                <a className="item" href="/#skill">Skills</a>
-                <a className="item" href="/#interests">Interests</a>
-                <a className="item" href="/#honors">Honors</a>
-                <a className="item" href="/#links">Links</a>
-                <a className="item" onClick={props.handleEdit}>Edit</a>
-            </div>
-        </div>
-    )
+  return (
+    <Menu secondary className="right-padded">
+        <a className="item heading" href="/jobs">JOBS</a>
+        <a className="item heading" href="/skill">SKILLSETS</a>
+        <a className="item heading" href="/interests">INTERESTS</a>
+        <a className="item heading" href="/honors">HONORS</a>
+        <a className="item heading" href="/contact">CONTACT</a>
+        <a className="item heading" onClick={props.handleEdit}><Icon name="bars"/></a>    
+    </Menu>
+  )
 }
 
 export default Nav
