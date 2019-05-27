@@ -4,24 +4,29 @@ import {Grid, Segment} from 'semantic-ui-react'
 
 const NamePicIntro = (props) => {
 
-   return(<Grid columns={2} stretched className="grayBG">
-      <Grid.Column>
-         <Segment></Segment>
-         <Segment className="middle aligned">Hello, my name is <br />
+   return(<Grid columns={16} stretched className="">
+            <Grid.Column width={2}></Grid.Column>
+            <Grid.Column width={5} textAlign="right" verticalAlign="middle">
+               <Grid.Row>{' '}</Grid.Row>
+               <Grid.Row>{' '}</Grid.Row>
+               <Grid.Row>
+                  <span className="bottomText">Hello, my name is <br /> <br /></span>
+               </Grid.Row>
+               <Grid.Row>
                   <span className="heading font-size-huge">
-                     {props.user.first_name} {props.user.last_name}
-                     </span><br />
-                  {props.user.intro}
-         </Segment>
-         <Segment></Segment>
-      </Grid.Column>
+                     {props.user.first_name} {props.user.last_name} <br />
+                  </span>
+               </Grid.Row>
+               <Grid.Row>
+               <span className="topText">{props.user.intro}</span>
+               </Grid.Row>
+               <Grid.Row>{' '}</Grid.Row>
+               <Grid.Row>{' '}</Grid.Row>
+            </Grid.Column>
 
-      <Grid.Column>
-         <Segment>
+      <Grid.Column width={8} textAlign="left">
          <img className="image-circle-portrait"
-            src={props.user.img_url}
-            alt="portrait"></img>
-         </Segment>
+            src={props.user.img_url} alt="portrait"></img>
       </Grid.Column>
    </Grid>)
 }

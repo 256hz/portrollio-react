@@ -6,7 +6,7 @@ const AboutMe = (props) => {
   return (<Grid columns='equal' divided='vertically'>
 
       <Grid.Row columns={1}>
-        <Grid.Column className="heading font-size-large">
+        <Grid.Column className="heading font-size-large" verticalAlign="top">
           <br />
           About Me
         </Grid.Column>
