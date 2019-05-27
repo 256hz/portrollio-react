@@ -2,42 +2,38 @@ import React from 'react'
 import { Grid, List } from 'semantic-ui-react';
 
 const Jobs = (props) => {
-
+  // let colors = ['orange', 'yellow', 'green', 'teal']
   return(
     <Grid divided="vertically" padded="horizontally">
 
       <Grid.Row>
-        <Grid.Column className="heading">
+        <Grid.Column className="heading font-size-large">
           <br />
           Jobs
         </Grid.Column>
       </Grid.Row>
 
-      <Grid.Row columns={props.jobs.length} padded="horizontally">
-        {props.jobs.map(job => {
-          let imgStyle = {
-            className: "image-circle-small-img",
-            backgroundImage: `url(${job.img_url})`
-          }
+      <Grid.Row columns="equal" padded="horizontally">
+        {props.jobs.map( job => {
           return(
-            <Grid.Column key={job.title}>
+            <Grid.Column key={job.title} padded="vertically">
 
               <Grid.Row>
-                <div className="image-circle-small">
-                  <div style={imgStyle}/>
-                </div>
-                <div className="company-logo-name-container">
-                  <h2 className="ui header">{job.title}</h2>
-                  <h3 className="ui header">{job.company}</h3>
-                </div>
+                
+                <Grid.Column className="image-circle-small-job middle aligned">
+                  <img className="image-circle-small-img" src={job.img_url} alt={job.company} />
+                </Grid.Column>
+                <Grid.Column className="middle aligned">
+                  <Grid.Row className="heading font-size-large">{job.title}</Grid.Row>
+                  <Grid.Row className="heading font-size-medium">{job.company}</Grid.Row>
+                  <Grid.Row className="heading font-size-small">
+                    {job.start_month} {job.start_year} - {job.end_month}
+                    {' '}{job.end_year ? job.end_year : 'Present'}
+                  </Grid.Row>
+                </Grid.Column>
               </Grid.Row>
 
-              <h4 className="ui header">
-                {job.start_month} {job.start_year} - {job.end_month}
-                {' '}{job.end_year ? job.end_year : 'Present'}
-              </h4>
-
-              <p className="font_size_medium ui paragraph">{job.summary}</p>
+              <Grid.Row className="font_size_medium">{job.summary}</Grid.Row>
               <List bulleted>
                 {
                   job.responsibilities.map(res => {
@@ -45,7 +41,6 @@ const Jobs = (props) => {
                   })
                 }
               </List>
-
             </Grid.Column>
           )}
         )}

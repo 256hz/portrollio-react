@@ -41,10 +41,10 @@ class Content extends Component {
 
   componentDidMount() {
     //automated fetch
-    anchors.forEach( f => {
-      fetch( apiURL + f )
+    anchors.forEach( a => {
+      fetch( apiURL + a )
       .then( res => res.json() )
-      .then( json => this.setState({[f]: json}))
+      .then( json => this.setState({[a]: json}))
     })
 
     //special fetch for users
@@ -58,7 +58,7 @@ class Content extends Component {
 
   render() {
     return (
-      <Grid className="App ui">
+      <Grid className="">
 
         <Grid.Row className="grayBG">
           <Grid.Column>
@@ -66,7 +66,7 @@ class Content extends Component {
           </Grid.Column>
         </Grid.Row>
 
-        <Grid.Row>
+        <Grid.Row className>
           <Grid.Column>
             <NamePicIntro user={this.state.currentUser}/>
           </Grid.Column>
@@ -74,7 +74,8 @@ class Content extends Component {
 
         <Grid.Row className="">
           <Grid.Column>
-            <AboutMe user={this.state.currentUser}/>
+            <AboutMe user={this.state.currentUser} />
+            <Skills skills={this.state.skills} />
           </Grid.Column>
         </Grid.Row>
 

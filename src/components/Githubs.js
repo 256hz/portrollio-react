@@ -1,34 +1,50 @@
 import React from 'react'
+import Github from './Github'
+import {Grid, Card} from 'semantic-ui-react'
+
 
 const Githubs = (props) => {
-  return(
-    <div className="ui four column doubling stackable grid container">  
-      <div className="ui cards">
+  return (<Grid columns='equal' divided='vertically'>
+    
+    <Grid.Row columns={1}>
+      <Grid.Column className="heading font-size-large">
+        <br />
+        Githubs
+      </Grid.Column>
+    </Grid.Row>
+    <Grid.Row>
+      <Card.Group>
+        <br />
         {props.githubs.map(github => {
-          let fancy_name = github.repo_name.split('-').map( word => word[0].toUpperCase() + word.slice(1)).join(" ")
-          return(
-              <div className="ui card">
-                <div className="content middle aligned">
-                  <img className="right floated mini ui image" src={github.img_url} alt={fancy_name}/>
-                  <div className="header">
-                    {fancy_name}
-                  </div>
-                  <div className="meta">
-                    {github.summary}
-                  </div>
-                  <div className="description">
-                    Not sure what goes here if anything
-                  </div>
-                </div>
-              </div>
-            )}
-          )}
-      </div>
-    </div>
+          return <Grid.Column>
+            <Github github={github} />
+          </Grid.Column>
+        })}
+      </Card.Group>
+    </Grid.Row>
+<br />
+
+  </Grid>
   )
 }
-    
+
 export default Githubs
+
+  // return(
+  //   <Grid columns={16}>
+  //     <Grid.Column width={2}></Grid.Column>
+  //     <Grid.Column width={12}>
+  //       <Card.Group>
+  //         {props.githubs.map(github => {
+  //           return <Grid.Column>
+  //               <Github github={github} />
+  //             </Grid.Column>
+  //         })}
+  //       </Card.Group>
+  //     </Grid.Column>
+  //     <Grid.Column width={2}></Grid.Column>
+  //   </Grid>
+
 // let styles={
 //   display: 'inline'
 // }
