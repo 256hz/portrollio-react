@@ -5,7 +5,7 @@ import SectionHeading from './SectionHeading'
 const Skills = (props) => {
 
   return (
-  <Grid columns='equal' divided='vertically'>
+  <Grid columns='equal'>
     <SectionHeading text="Primary Skillsets" 
       getContent={_ => props.getContent(props.skills, '#skills')} 
       editing={props.editing}

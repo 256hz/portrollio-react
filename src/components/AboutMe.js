@@ -5,7 +5,7 @@ import { Grid } from 'semantic-ui-react'
 const AboutMe = (props) => {
 
   return (
-    <Grid columns='equal' divided='vertically'>
+    <Grid columns='equal'>
       <SectionHeading text="About Me" 
         getContent={_ => props.getContent(props.user, '#about')}
         editing={props.editing}

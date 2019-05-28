@@ -2,6 +2,9 @@ import React from 'react'
 import './App.css';
 import { Icon, Menu, Segment, Sidebar, Sticky } from 'semantic-ui-react'
 import Content from './components/Content'
+import Login from './components/Login'
+import LoggedIn from './components/LoggedIn'
+const apiURL = 'http://localhost:3000/api/v1/'
 import Editor from './components/Editor'
 
 class App extends React.Component {
@@ -10,12 +13,24 @@ class App extends React.Component {
         this.state = {
           sidebarVisible: false,
           editorDisabled: true,
+          loggedIn: false,
           editing: []
         }
     }
 
     openSidebar = () => {
       this.setState({sidebarVisible: !this.state.sidebarVisible})
+    }
+
+    login = (user, pass) => {
+      console.log('super secure', user, pass)
+      fetch('http://localhost:3000/api/v1/profile', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer <token>`
+      }
+})
+      this.setState({username: user, loggedIn: true})
     }
 
     handleEdit = (content) => {
@@ -74,8 +89,10 @@ class App extends React.Component {
                    Close
                  </Menu.Item>
                  <Menu.Item as='a'>
-                   <Icon name='home' />
-                   Home
+                    {this.state.loggedIn
+                      ? <LoggedIn username={this.state.username}/>
+                      : <Login login={this.login} />
+                    }
                  </Menu.Item>
 
                  <Editor
