@@ -23,12 +23,13 @@ const DEFAULT_STATE = {
   links: [],
   users: [],
   currentUser: {},
+  editing: true
 }
 let keys = Object.keys(DEFAULT_STATE)
-let anchors = keys.slice(0, keys.length-2)
-// used to automate fetch -- users & currentUser are not 
-// fetched automatically so they are excluded (length-2). We can
-// add resources as long as they are before the final 2 in the list. 
+let anchors = keys.slice(0, keys.length-3)
+// used to automate fetch -- users & currentUser are created  
+// together, and editing is a state, so they are excluded (length-3). 
+// Add any other resources before the final 3 in the list. 
 
 class Content extends Component {
   constructor() {
@@ -70,41 +71,45 @@ class Content extends Component {
 
         <Grid.Row key="name" id="name">
           <Grid.Column>
-            <NamePicIntro user={this.state.currentUser}/>
+            <NamePicIntro user={this.state.currentUser} editing={this.state.editing}
+              getContent={this.getContent} />
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row key="about" id="about">
           <Grid.Column>
-            <SectionHeading text="About Me" getContent={this.getContent}/>
-            <AboutMe user={this.state.currentUser} />
+            <AboutMe user={this.state.currentUser} editing={this.state.editing}
+               getContent={this.getContent}
+            />
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row key="skills" id="skills">
           <Grid.Column>
-            <Skills skills={this.state.skills} getContent={this.getContent}/>
+            <Skills skills={this.state.skills} editing={this.state.editing} 
+              getContent={this.getContent}
+            />
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row key="jobs" id="jobs">
           <Grid.Column>
-            <SectionHeading text="Positions" getContent={this.getContent} />
-            <Jobs jobs={this.state.jobs}/>
+            <Jobs jobs={this.state.jobs} editing={this.state.editing} 
+              getContent={this.getContent}/>
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row key="github" id="github">
           <Grid.Column>
-            <SectionHeading text="Featured Repos" getContent={this.getContent} />
-            <Githubs githubs={this.state.githubs}/>
+            <Githubs githubs={this.state.githubs} editing={this.state.editing} 
+              getContent={this.getContent}/>
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row key="contact" id="contact">
           <Grid.Column>
-            <SectionHeading text="Contact" getContent={this.getContent} />
-            <Contact user={this.state.currentUser}/>
+            <Contact user={this.state.currentUser} editing={this.state.editing} 
+              getContent={this.getContent}/>
           </Grid.Column>
         </Grid.Row>
 

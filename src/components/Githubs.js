@@ -1,23 +1,28 @@
 import React from 'react'
 import Github from './Github'
+import SectionHeading from './SectionHeading'
 import {Grid, Card} from 'semantic-ui-react'
 
 
 const Githubs = (props) => {
-  return (<Grid columns={16} divided='vertically'>
-    <Grid.Row>
-      <Card.Group>
-        <br />
-        {props.githubs.map( (github, index) => {
-          return <Grid.Column key={github.repo_name + index}>
-            <Github github={github} />
-          </Grid.Column>
-        })}
-      </Card.Group>
-    </Grid.Row>
-<br />
-
-  </Grid>
+  return (
+    <Grid columns="equal" divided='vertically'>
+      <SectionHeading text="Featured Repos" 
+        getContent={ _ => this.getContent(props.githubs, '#githubs')} 
+        editing={props.editing}
+      />
+      <Grid.Row>
+        <Card.Group>
+          <br />
+          {props.githubs.map( (github, index) => {
+            return <Grid.Column key={github.repo_name + index}>
+              <Github github={github} />
+            </Grid.Column>
+          })}
+        </Card.Group>
+      </Grid.Row>
+    <br />
+    </Grid>
   )
 }
 

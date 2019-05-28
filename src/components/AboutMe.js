@@ -1,10 +1,16 @@
 import React from 'react'
+import SectionHeading from './SectionHeading'
 import { Grid } from 'semantic-ui-react'
 
 const AboutMe = (props) => {
 
   return (
-    <Grid>
+    <Grid columns='equal' divided='vertically'>
+      <SectionHeading text="About Me" 
+        getContent={_ => props.getContent(props.user, '#about')}
+        editing={props.editing}
+      />
+
       <Grid.Row columns={16}>
         <Grid.Column width={2}></Grid.Column>
         <Grid.Column width={12}>
