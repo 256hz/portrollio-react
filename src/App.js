@@ -4,6 +4,7 @@ import { Icon, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import Content from './components/Content'
 import Login from './components/Login'
 import LoggedIn from './components/LoggedIn'
+const apiURL = 'http://localhost:3000/api/v1/'
 
 class App extends React.Component {
     constructor() {
@@ -21,15 +22,17 @@ class App extends React.Component {
 
     login = (user, pass) => {
       console.log('super secure', user, pass)
+      fetch('http://localhost:3000/api/v1/profile', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer <token>`
+      }
+})
       this.setState({username: user, loggedIn: true})
     }
 
     handleEdit = (content) => {
       console.log("editing", content)
-    }
-
-    handleInput = (e) => {
-      console.log(e.target.value)
     }
 
     render() {
