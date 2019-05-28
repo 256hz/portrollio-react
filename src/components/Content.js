@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { anchorate } from 'anchorate'
-import { createHistory } from 'history'
 import Nav from './Nav'
 import NamePicIntro from './NamePicIntro'
 import AboutMe from './AboutMe'
@@ -26,7 +23,6 @@ const DEFAULT_STATE = {
   currentUser: {},
   visible: []
 }
-
 let keys = Object.keys(DEFAULT_STATE)
 let anchors = keys.slice(0, keys.length-3)
 // used to automate fetch -- users, currentUser & visible are not 
@@ -58,44 +54,48 @@ class Content extends Component {
 
   render() {
     return (
-      <Grid className="">
+      <Grid key="nav" id="nav">
+              <Grid.Row>
+        <Grid.Column>
+          <Nav handleEdit={this.props.handleEdit}/>
+        </Grid.Column>
+      </Grid.Row>
 
-        <Grid.Row className="">
-          <Grid.Column>
-            <Nav handleEdit={this.props.handleEdit}/>
-          </Grid.Column>
-        </Grid.Row>
+      <Grid.Row>
+        <Grid.Column>
+          <NamePicIntro user={this.state.currentUser}/>
+        </Grid.Column>
+      </Grid.Row>
 
-        <Grid.Row className="">
-          <Grid.Column>
-            <NamePicIntro user={this.state.currentUser}/>
-          </Grid.Column>
-        </Grid.Row>
+      <Grid.Row key="about" id="about">
+        <Grid.Column>
+          <AboutMe user={this.state.currentUser} />
+        </Grid.Column>
+      </Grid.Row>
 
-        <Grid.Row className="">
-          <Grid.Column>
-            <AboutMe user={this.state.currentUser} />
-            <Skills skills={this.state.skills} />
-          </Grid.Column>
-        </Grid.Row>
+      <Grid.Row key="skills" id="skills">
+        <Grid.Column>
+          <Skills skills={this.state.skills}/>
+        </Grid.Column>
+      </Grid.Row>
 
-        <Grid.Row className="">
-          <Grid.Column>
-            <Jobs jobs={this.state.jobs}/>
-          </Grid.Column>
-        </Grid.Row>
+      <Grid.Row key="jobs" id="jobs">
+        <Grid.Column>
+          <Jobs jobs={this.state.jobs}/>
+        </Grid.Column>
+      </Grid.Row>
 
-        <Grid.Row className="">
-          <Grid.Column>
-            <Githubs githubs={this.state.githubs}/>
-          </Grid.Column>
-        </Grid.Row>
+      <Grid.Row key="githubs" id="githubs">
+        <Grid.Column>
+          <Githubs githubs={this.state.githubs}/>
+        </Grid.Column>
+      </Grid.Row>
 
-        <Grid.Row className="">
-          <Grid.Column>
-            <Contact user={this.state.currentUser}/>
-          </Grid.Column>
-        </Grid.Row>
+      <Grid.Row key="contact" id="contact">
+        <Grid.Column>
+          <Contact user={this.state.currentUser}/>
+        </Grid.Column>
+      </Grid.Row>
 
       </Grid>
     );
@@ -105,15 +105,35 @@ class Content extends Component {
 export default Content;
 
 
-        // visible: [
-        //   <Nav user={this.state.currentUser} />, 
-        //   <NamePicIntro user={this.state.currentUser} />,
-        //   <AboutMe user={this.state.currentUser} />, 
-        //   <Jobs jobs={this.state.jobs} />, 
-        //   <Githubs githubs={this.state.githubs} />, 
-        //   <Interests interests={this.state.interests}/>, 
-        //   <Skills skills={this.state.skills} />, 
-        //   <Honors honors={this.state.honors} />, 
-        //   <Links links={this.state.links} />,
-        //   <Contact user={this.state.currentUser} />,
-        // ]  
+// visible: [
+//   <Nav user={this.state.currentUser} />, 
+//   <NamePicIntro user={this.state.currentUser} />,
+//   <AboutMe user={this.state.currentUser} />, 
+//   <Jobs jobs={this.state.jobs} />, 
+//   <Githubs githubs={this.state.githubs} />, 
+//   <Interests interests={this.state.interests}/>, 
+//   <Skills skills={this.state.skills} />, 
+//   <Honors honors={this.state.honors} />, 
+//   <Links links={this.state.links} />,
+//   <Contact user={this.state.currentUser} />,
+// ]  
+
+// const SECTIONS = [
+//   {nav:  [<Nav handleEdit={this.props.handleEdit}/>]},
+//   {name: [<NamePicIntro user={this.state.currentUser}/>]},
+//   {about:[<AboutMe user={this.state.currentUser} />,
+//           <Skills skills={this.state.skills} />]},
+//   {jobs: [<Jobs jobs={this.state.jobs} />]},
+//   {githubs: [<Githubs githubs={this.state.githubs}/>]},
+//   {contact: [<Contact user={this.state.currentUser}/>]}
+// ]
+
+// {SECTIONS.map( section => {
+//   return <Grid.Row>
+//     <Grid.Column>
+//       {section.map (component => {
+//         return React.createElement(Object.values(component)[0], {})
+//       })}
+//     </Grid.Column>
+//   </Grid.Row>
+// })}

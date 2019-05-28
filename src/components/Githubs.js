@@ -4,7 +4,7 @@ import {Grid, Card} from 'semantic-ui-react'
 
 
 const Githubs = (props) => {
-  return (<Grid columns='equal' divided='vertically'>
+  return (<Grid columns={16} divided='vertically'>
     
     <Grid.Row columns={1}>
       <Grid.Column className="heading font-size-large">
