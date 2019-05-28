@@ -15,7 +15,7 @@ return (
       <Grid.Column width={1} textAlign="right" verticalAlign="middle">
           {props.loggedIn
             ? <Button onClick={props.startEdit} icon="pencil square"/>
-            : 'login to edit'}
+            : null}
       </Grid.Column>
 
       <Grid.Column width={15}>
