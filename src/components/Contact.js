@@ -10,7 +10,6 @@ const Contact = (props) => {
 
     return (
         <div className="centered">
-            <div className="heading">Contact</div>
             <span className="contact">
               <a href={"mailto:"+props.user.email}>{props.user.email}</a>
             </span>

@@ -5,18 +5,11 @@ import {Grid, Card} from 'semantic-ui-react'
 
 const Githubs = (props) => {
   return (<Grid columns={16} divided='vertically'>
-    
-    <Grid.Row columns={1}>
-      <Grid.Column className="heading font-size-large">
-        <br />
-        Githubs
-      </Grid.Column>
-    </Grid.Row>
     <Grid.Row>
       <Card.Group>
         <br />
-        {props.githubs.map(github => {
-          return <Grid.Column>
+        {props.githubs.map( (github, index) => {
+          return <Grid.Column key={github.repo_name + index}>
             <Github github={github} />
           </Grid.Column>
         })}
