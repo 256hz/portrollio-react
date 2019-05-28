@@ -45,7 +45,7 @@ class Content extends Component {
         <Grid.Row key="skills" id="skills">
           <Grid.Column>
             <Skills skills={this.props.skills} editing={this.props.editing}
-              startEdit={this.startEdit}
+              startEdit={this.props.startEdit}
             />
           </Grid.Column>
         </Grid.Row>
@@ -53,21 +53,21 @@ class Content extends Component {
         <Grid.Row key="jobs" id="jobs">
           <Grid.Column>
             <Jobs jobs={this.props.jobs} editing={this.props.editing}
-              startEdit={this.startEdit}/>
+              startEdit={this.props.startEdit}/>
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row key="github" id="github">
           <Grid.Column>
             <Githubs githubs={this.props.githubs} editing={this.props.editing}
-              startEdit={this.startEdit}/>
+              startEdit={this.props.startEdit}/>
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row key="contact" id="contact">
           <Grid.Column>
             <Contact user={this.props.currentUser} editing={this.props.editing}
-              startEdit={this.startEdit}/>
+              startEdit={this.props.startEdit}/>
           </Grid.Column>
         </Grid.Row>
 

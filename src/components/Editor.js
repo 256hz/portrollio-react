@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Icon, Menu, Segment, Sidebar, Form, Button } from 'semantic-ui-react'
 import AboutMeEdit from './editForms/AboutMeEdit'
+import SkillsEdit from './editForms/SkillsEdit'
 
 export default class Editor extends Component {
 
@@ -12,9 +13,10 @@ export default class Editor extends Component {
   chooseEditor = () => {
     switch (this.props.editingType) {
       case "users":
-        console.log('here')
         return <AboutMeEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} />
         break
+      case "skills":
+        return <SkillsEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
       default:
         return null
     }
