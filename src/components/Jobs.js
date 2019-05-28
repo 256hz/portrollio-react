@@ -5,7 +5,7 @@ import { Grid, List } from 'semantic-ui-react';
 const Jobs = (props) => {
   // let colors = ['orange', 'yellow', 'green', 'teal']
   return(
-    <Grid columns="equal" divided="vertically">
+    <Grid columns="equal">
       <SectionHeading text="Positions" 
         getContent={_ => props.getContent(props.jobs, '#jobs')} 
         editing={props.editing}
