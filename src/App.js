@@ -67,6 +67,10 @@ class App extends React.Component {
       this.setState({username: user, loggedIn: true})
     }
 
+    logOut = () => {
+      this.setState({loggedIn: false})
+    }
+
     startEdit = (content, type) => {
       this.setState({
         editing: content,
@@ -145,6 +149,7 @@ class App extends React.Component {
                   users={this.state.users}
                   currentUser= {this.state.currentUser}
                   editing={this.state.editing}
+                  loggedIn={this.state.loggedIn}
                 />
 
               </Segment>

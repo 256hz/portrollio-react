@@ -9,6 +9,7 @@ const AboutMe = (props) => {
       <SectionHeading text="About Me"
         startEdit={_ => props.startEdit(props.user, 'users')}
         editing={props.editing}
+        loggedIn={props.loggedIn}
       />
 
       <Grid.Row columns={16}>

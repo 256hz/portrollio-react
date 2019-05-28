@@ -10,6 +10,7 @@ const Githubs = (props) => {
       <SectionHeading text="Featured Repos" 
         getContent={ _ => props.getContent(props.githubs)} 
         editing={props.editing}
+        loggedIn={props.loggedIn}
       />
       <Grid.Row>
         <Card.Group>

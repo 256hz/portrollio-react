@@ -9,6 +9,7 @@ const Jobs = (props) => {
       <SectionHeading text="Positions" 
         getContent={_ => props.getContent(props.jobs, '#jobs')} 
         editing={props.editing}
+        loggedIn={props.loggedIn}
       />
 
       <Grid.Row columns={16} padded="horizontally">
