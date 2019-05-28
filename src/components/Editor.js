@@ -6,16 +6,14 @@ export default class Editor extends Component {
 
   constructor(props){
     super(props)
-    this.state = {
-      content: {}
-    }
+    this.state = {}
   }
 
   chooseEditor = () => {
     switch (this.props.editingType) {
       case "users":
         console.log('here')
-        return <AboutMeEdit content={this.props.content} handleSubmit={this.props.handleSubmit} />
+        return <AboutMeEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} />
         break
       default:
         return null

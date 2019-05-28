@@ -14,17 +14,17 @@ return (
     <Grid.Row className="heading-bg">
       <Grid.Column width={1} textAlign="right" verticalAlign="middle">
           {props.editing
-            ? <Button onClick={props.getContent} icon="pencil square"/>
+            ? <Button onClick={props.startEdit} icon="pencil square"/>
             : null}
       </Grid.Column>
-    
+
       <Grid.Column width={15}>
         <div>
             <span className="font-size-large heading-font">{props.text}</span>
         </div>
       </Grid.Column>
     </Grid.Row>
-    
+
     <Grid.Column width={16}>{' '}</Grid.Column>
     <Grid.Column width={16}>{' '}</Grid.Column>
 

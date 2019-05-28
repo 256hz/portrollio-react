@@ -7,7 +7,7 @@ const AboutMe = (props) => {
   return (
     <Grid columns='equal'>
       <SectionHeading text="About Me"
-        getContent={_ => props.startEdit(props.user, 'users')}
+        startEdit={_ => props.startEdit(props.user, 'users')}
         editing={props.editing}
       />
 

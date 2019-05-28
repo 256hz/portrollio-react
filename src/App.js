@@ -122,7 +122,7 @@ class App extends React.Component {
 
                  <Editor
                   editorDisabled={this.state.editorDisabled}
-                  content={this.state.editing}
+                  editing={this.state.editing}
                   handleSubmit={this.handleSubmit}
                   editingType={this.state.editingType}
                  />
