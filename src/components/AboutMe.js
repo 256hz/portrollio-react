@@ -6,15 +6,15 @@ const AboutMe = (props) => {
 
   return (
     <Grid columns='equal'>
-      <SectionHeading text="About Me" 
-        getContent={_ => props.getContent(props.user, '#about')}
+      <SectionHeading text="About Me"
+        startEdit={_ => props.startEdit(props.user, 'users')}
         editing={props.editing}
       />
 
       <Grid.Row columns={16}>
         <Grid.Column width={2}></Grid.Column>
         <Grid.Column width={12}>
-          {props.user.bio} 
+          {props.user.bio}
         </Grid.Column>
         <Grid.Column width={2}></Grid.Column>
       </Grid.Row>
