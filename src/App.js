@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css';
 import { Icon, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import Content from './components/Content'
+import Login from './components/Login'
 
 class App extends React.Component {
     constructor() {
@@ -33,8 +34,7 @@ class App extends React.Component {
                  Close
                </Menu.Item>
                <Menu.Item as='a'>
-                 <Icon name='home' />
-                 Home
+                  <Login />
                </Menu.Item>
                <Menu.Item as='a'>
                  <Icon name='gamepad' />
