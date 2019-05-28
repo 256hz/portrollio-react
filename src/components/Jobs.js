@@ -1,10 +1,15 @@
 import React from 'react'
+import SectionHeading from './SectionHeading'
 import { Grid, List } from 'semantic-ui-react';
 
 const Jobs = (props) => {
   // let colors = ['orange', 'yellow', 'green', 'teal']
   return(
-    <Grid divided="vertically" padded="horizontally">
+    <Grid columns="equal" divided="vertically">
+      <SectionHeading text="Positions" 
+        getContent={_ => props.getContent(props.jobs, '#jobs')} 
+        editing={props.editing}
+      />
 
       <Grid.Row columns={16} padded="horizontally">
         <Grid.Column width={2}></Grid.Column>

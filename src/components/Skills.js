@@ -6,7 +6,10 @@ const Skills = (props) => {
 
   return (
   <Grid columns='equal' divided='vertically'>
-    <SectionHeading text="Primary Skillsets" getContent={_ => props.getContent(props.skills)} />
+    <SectionHeading text="Primary Skillsets" 
+      getContent={_ => props.getContent(props.skills, '#skills')} 
+      editing={props.editing}
+    />
       <Grid.Row columns={props.skills.length+8} padded="horizontally"
           verticalAlign="middle" textAlign="center">
         <Grid.Column width={2}></Grid.Column>
