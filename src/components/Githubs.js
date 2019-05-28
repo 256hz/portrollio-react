@@ -8,7 +8,7 @@ const Githubs = (props) => {
   return (
     <Grid columns="equal" divided='vertically'>
       <SectionHeading text="Featured Repos" 
-        getContent={ _ => this.getContent(props.githubs, '#githubs')} 
+        getContent={ _ => props.getContent(props.githubs)} 
         editing={props.editing}
       />
       <Grid.Row>

@@ -10,7 +10,6 @@ import Interests from './Interests'
 import Honors from './Honors'
 import Links from './Links'
 import { Grid } from 'semantic-ui-react'
-import SectionHeading from './SectionHeading';
 
 const apiURL = 'http://localhost:3000/api/v1/'
 
