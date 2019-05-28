@@ -18,23 +18,27 @@
   padding-left: 10px;
 }
 
-.font-size-small{
+.font-heading {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.font-size-small {
   font-size: 18px;
 }
 
-.font-size-medium{
+.font-size-medium {
   font-size: 24px;
 }
 
-.font-size-large{
-  font-size: 30px;
+.font-size-large {
+  font-size: 32px;
 }
 
-.font-size-huge{
+.font-size-huge {
   font-size: 42px;
 }
 
-.grayBG:before {
+.gray-bg:before {
   /* background-color: #EEE; */
   content: "";
   position: fixed;
@@ -44,12 +48,14 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background-color: deepskyblue;
+  background: rgb(0,191,255);
+  background: linear-gradient(0deg, rgba(0,191,255,0.33) 0%, rgba(255,255,255,0) 100%);
+
   background-image: url(/images/light_noise_diagonal_@2X.png) green;
   opacity: 0.4;
 }
 
-.grayBG:after {
+.gray-bg:after {
   content: "";
   position: fixed;
   z-index: -1;
@@ -59,19 +65,28 @@
   width: 100%;
   height: 100%;
   filter: grayscale(10%) invert(10%);
-  background-image: linear-gradient(to bottom, deepskyblue, transparent 70%);
-  background-image: url(/images/light_noise_diagonal_@2X.png) green;
+  background: rgb(0,191,255);
+  background: linear-gradient(0deg, rgba(0,191,255,0.33) 0%, rgba(255,255,255,0) 100%);
+  /* background-image: url(/images/light_noise_diagonal_@2X.png) green; */
 }
 
-.heading {
-  font-family: 'Montserrat', sans-serif;
-  vertical-align: top;
-  background: linear-gradient(90deg, rgba(0,191,255,0.25) 0%, rgba(255,255,255,0) 100%);
+.heading-outer {
+  position:relative;
+  width:100%;
+}
+
+.heading-font {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+}
+
+.heading-bg{
+background: linear-gradient(90deg, rgba(255, 0, 191, 0.25) 0%, rgba(255,255,255,0) 100%);
 }
 
 .image-circle-portrait {
   border-radius: 50%;
-  border: 1px solid teal;
+  /* border: 1px solid teal; */
   max-width: 500px;
   max-height: 500px;
   min-width: 500px;
@@ -86,7 +101,6 @@
   overflow: hidden;
   margin: 10px;
   position: relative;
-  float: left;
 }
 
 .image-circle-small-job img {
@@ -127,7 +141,6 @@ img {
 }
 
 .name {
-  text-align: center;
   font-family: 'Reem Kufi', sans-serif;
   font-size: 4rem;
 }
@@ -156,26 +169,18 @@ img {
   margin-top: 0%;
 }
 
+.up-arrow {
+  float: right;
+}
+
 .wide {
   width: 100%;
 }
 
-.colorBG:before {
-  content: "";
-  position: fixed;
-  z-index: -1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  backface-visibility: hidden;
-  /* background-image: url(http://localhost:3000/images/light_noise_diagonal_@2X.png) deepskyblue; */
-  background-color: deepskyblue;
-  opacity: 0.4;
-  filter: grayscale(100%) invert(100%);
-}
-
 * {
-  font-family: 'Abel', sans-serif;
-  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  text-align: justify;
 }

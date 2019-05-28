@@ -11,9 +11,12 @@ class App extends React.Component {
         }
     }
 
-    handleEdit = () => {
-      console.log('here');
+    openSidebar = () => {
       this.setState({visible: !this.state.visible})
+    }
+
+    handleEdit = (content) => {
+      console.log("editing", content)
     }
 
     render() {
@@ -25,7 +28,7 @@ class App extends React.Component {
                visible={this.state.visible}
                width='wide'
              >
-               <Menu.Item as='a' onClick={this.handleEdit}>
+               <Menu.Item as='a' onClick={this.openSidebar}>
                  <Icon name='cancel' size="mini"/>
                  Close
                </Menu.Item>
@@ -39,9 +42,12 @@ class App extends React.Component {
                </Menu.Item>
              </Sidebar>
              <Sidebar.Pusher dimmed={false}>
-              <Segment basic className="grayBG">
+              <Segment basic className="gray-bg">
 
-                <Content handleEdit={this.handleEdit}/>
+                <Content 
+                  openSidebar={this.openSidebar}
+                  handleEdit={this.handleEdit}
+                />
               
               </Segment>
             </Sidebar.Pusher>

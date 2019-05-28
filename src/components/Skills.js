@@ -1,22 +1,17 @@
 import React from 'react'
 import {Grid, Popup, Image} from 'semantic-ui-react'
+import SectionHeading from './SectionHeading'
 
 const Skills = (props) => {
 
-  return (<Grid columns='equal' divided='vertically'>
-    
-    <Grid.Row columns={1}>
-      <Grid.Column className="heading font-size-large">
-        <br />
-        Skillsets
-      </Grid.Column>
-    </Grid.Row>
-    
-      <Grid.Row columns={props.skills.length+6} padded="horizontally"
-          verticalAlign="middle" textAlign="center" container>
-        <Grid.Column width={3}></Grid.Column>
+  return (
+  <Grid columns='equal' divided='vertically'>
+    <SectionHeading text="Primary Skillsets" getContent={_ => props.getContent(props.skills)} />
+      <Grid.Row columns={props.skills.length+8} padded="horizontally"
+          verticalAlign="middle" textAlign="center">
+        <Grid.Column width={2}></Grid.Column>
         {props.skills.map( skill => {
-          return <Grid.Column>
+          return <Grid.Column key={skill.name}>
             <Grid.Row>
               <Popup
                 key={skill.name} header={skill.name}
@@ -29,7 +24,7 @@ const Skills = (props) => {
             </Grid.Row>
           </Grid.Column>
         })}
-        <Grid.Column width={3}></Grid.Column>
+        <Grid.Column width={2}></Grid.Column>
       </Grid.Row>
     <br />
 
