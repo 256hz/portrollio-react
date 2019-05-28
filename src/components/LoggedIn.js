@@ -4,7 +4,7 @@ import {Grid} from 'semantic-ui-react'
 const Login = (props) => {
 
     return (
-    <Grid columns="equal">
+    <Grid columns="equal" textAlign="center">
         Welcome, {props.username}
     </Grid>
         )

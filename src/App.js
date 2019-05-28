@@ -21,7 +21,7 @@ class App extends React.Component {
 
     login = (user, pass) => {
       console.log('super secure', user, pass)
-      this.setState({username: user})
+      this.setState({username: user, loggedIn: true})
     }
 
     handleEdit = (content) => {
@@ -48,7 +48,7 @@ class App extends React.Component {
                <Menu.Item as='a'>
                   {this.state.loggedIn
                     ? <LoggedIn username={this.state.username}/>
-                    : <Login handleInput={this.handleInput} login={this.login} username={this.state.username} password={this.state.password}/>
+                    : <Login login={this.login} />
                   }
                </Menu.Item>
                <Menu.Item as='a'>
