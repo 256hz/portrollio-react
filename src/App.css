@@ -184,3 +184,7 @@ img {
   line-height: 2rem;
   text-align: justify;
 }
+
+.fix-sidebar {
+  transform: none !important;
+}
