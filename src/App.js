@@ -3,12 +3,15 @@ import './App.css';
 import { Icon, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import Content from './components/Content'
 import Login from './components/Login'
+import LoggedIn from './components/LoggedIn'
 
 class App extends React.Component {
     constructor() {
         super()
         this.state = {
-          visible: false
+          visible: true,
+          loggedIn: false,
+          username: null
         }
     }
 
@@ -16,8 +19,17 @@ class App extends React.Component {
       this.setState({visible: !this.state.visible})
     }
 
+    login = (user, pass) => {
+      console.log('super secure', user, pass)
+      this.setState({username: user})
+    }
+
     handleEdit = (content) => {
       console.log("editing", content)
+    }
+
+    handleInput = (e) => {
+      console.log(e.target.value)
     }
 
     render() {
@@ -34,7 +46,10 @@ class App extends React.Component {
                  Close
                </Menu.Item>
                <Menu.Item as='a'>
-                  <Login />
+                  {this.state.loggedIn
+                    ? <LoggedIn username={this.state.username}/>
+                    : <Login handleInput={this.handleInput} login={this.login} username={this.state.username} password={this.state.password}/>
+                  }
                </Menu.Item>
                <Menu.Item as='a'>
                  <Icon name='gamepad' />
