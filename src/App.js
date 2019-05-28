@@ -67,6 +67,13 @@ class App extends React.Component {
       this.setState({username: user, loggedIn: true})
     }
 
+    logOut = () => {
+      this.setState({
+        loggedIn: false,
+        sidebarVisible: false
+      })
+    }
+
     startEdit = (content, type) => {
       console.log(content);
       this.setState({
@@ -136,12 +143,12 @@ class App extends React.Component {
                  width='wide'
                >
                  <Menu.Item as='a' onClick={this.openSidebar}>
-                   <Icon name='cancel' size="mini"/>
+                   <Icon name='bars' size="mini"/>
                    Close
                  </Menu.Item>
                  <Menu.Item as='a'>
                     {this.state.loggedIn
-                      ? <LoggedIn username={this.state.username}/>
+                      ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
                       : <Login login={this.login} />
                     }
                  </Menu.Item>
@@ -172,6 +179,7 @@ class App extends React.Component {
                   users={this.state.users}
                   currentUser= {this.state.currentUser}
                   editing={this.state.editing}
+                  loggedIn={this.state.loggedIn}
                 />
 
               </Segment>
