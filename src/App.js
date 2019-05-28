@@ -4,8 +4,8 @@ import { Icon, Menu, Segment, Sidebar, Sticky } from 'semantic-ui-react'
 import Content from './components/Content'
 import Login from './components/Login'
 import LoggedIn from './components/LoggedIn'
-const apiURL = 'http://localhost:3000/api/v1/'
 import Editor from './components/Editor'
+const apiURL = 'http://localhost:3000/api/v1/'
 
 class App extends React.Component {
     constructor() {
