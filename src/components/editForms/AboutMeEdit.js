@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Icon, Menu, Segment, Sidebar, Form, Button } from 'semantic-ui-react'
 
-export default class COMPONENT_NAME extends Component {
+export default class AboutMeEdit extends Component {
 
   constructor(props){
     super(props)

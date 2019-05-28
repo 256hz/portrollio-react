@@ -75,6 +75,7 @@ class App extends React.Component {
     }
 
     startEdit = (content, type) => {
+      console.log(content);
       this.setState({
         editing: content,
         editingType: type,
@@ -97,12 +98,37 @@ class App extends React.Component {
       .then(res => res.json())
       .then(json => {
         let editingTypeCopy=this.state.editingType
-        this.setState({
-          [editingTypeCopy]: json,
-          sidebarVisible: false,
-          editorDisabled: true,
-          editingType: '',
-        })
+        switch(editingTypeCopy) {
+          case "users":
+            this.setState({
+              users: [json],
+              currentUser: json,
+              sidebarVisible: false,
+              editorDisabled: true,
+              editingType: '',
+            })
+            break
+          case "skills":
+            let skillsCopy = [...this.state.skills]
+            skillsCopy.map(skill => {
+              return (skill.id === content.id) ? content : skill
+            })
+            this.setState({
+              skills: skillsCopy,
+              sidebarVisible: false,
+              editorDisabled: true,
+              editingType: '',
+            })
+            break
+          default:
+            let arrCopy = [...this.state[editingTypeCopy]]
+            this.setState({
+              [editingTypeCopy]: json,
+              sidebarVisible: false,
+              editorDisabled: true,
+              editingType: '',
+          })
+        }
       })
     }
 
@@ -132,6 +158,7 @@ class App extends React.Component {
                   editing={this.state.editing}
                   handleSubmit={this.handleSubmit}
                   editingType={this.state.editingType}
+                  startEdit={this.startEdit}
                  />
 
                </Sidebar>
