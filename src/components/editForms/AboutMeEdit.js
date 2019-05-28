@@ -6,44 +6,58 @@ export default class COMPONENT_NAME extends Component {
   constructor(props){
     super(props)
     this.state = {
-
+      content:{
+        id: -1
+      }
     }
   }
 
-  // static getDerivedStatesFromProps(props, state) {
-  //   if (props.content.id !== state.content.id) {
-  //     return props.content
-  //   }
-  // }
-  //
-  // handleChange = ev => {
-  //   console.log('change');
-  //   this.setState({
-  //     content:{
-  //       ...this.state.content,
-  //       [ev.target.name]: ev.target.value
-  //     }
-  //   })
-  // }
+  static getDerivedStateFromProps(props, state) {
+    console.log(props.content)
+    if (props.content.id !== state.content.id) {
+      return {content: props.content}
+    }
+  }
+
+  handleChange = (ev) => {
+    this.setState({
+      content:{
+        ...this.state.content,
+        [ev.target.name]: ev.target.value
+      }
+    })
+  }
 
   render(){
     return(
-      <Form inverted onSubmit={this.props.handleSubmit}>
+      <Form inverted onSubmit={() => this.props.handleSubmit(this.state.content)}>
         <Form.Field>
           <label>First Name</label>
-          <input name="first_name" defaultValue={this.props.content.first_name} />
+          <input name="first_name" value={this.state.content.first_name} onChange={this.handleChange}/>
         </Form.Field>
         <Form.Field>
           <label>Last Name</label>
-          <input name="last_name" defaultValue={this.props.content.last_name} />
+          <input name="last_name" value={this.state.content.last_name} onChange={this.handleChange}/>
+        </Form.Field>
+        <Form.Field>
+          <label>Title</label>
+          <input name="title" value={this.state.content.title} onChange={this.handleChange}/>
         </Form.Field>
         <Form.Field>
           <label>Email</label>
-          <input name="email" defaultValue={this.props.content.email} />
+          <input name="email" value={this.state.content.email} onChange={this.handleChange}/>
         </Form.Field>
         <Form.Field>
           <label>Phone</label>
-          <input name="phone" defaultValue={this.props.content.phone} />
+          <input name="phone" value={this.state.content.phone} onChange={this.handleChange}/>
+        </Form.Field>
+        <Form.Field>
+          <label>Intro</label>
+          <textarea name="intro" value={this.state.content.intro} onChange={this.handleChange}/>
+        </Form.Field>
+        <Form.Field>
+        <label>About Me</label>
+        <textarea name="bio" value={this.state.content.bio} onChange={this.handleChange}/>
         </Form.Field>
         <Button type='submit'>Submit</Button>
       </Form>

@@ -11,10 +11,21 @@ export default class Editor extends Component {
     }
   }
 
+  chooseEditor = () => {
+    switch (this.props.editingType) {
+      case "users":
+        console.log('here')
+        return <AboutMeEdit content={this.props.content} handleSubmit={this.props.handleSubmit} />
+        break
+      default:
+        return null
+    }
+  }
+
   render(){
     return(
-      <Menu.Item disabled={this.props.disabled} as='a'>
-        <AboutMeEdit content={this.props.content} handleSubmit={this.props.handleSubmit} />
+      <Menu.Item disabled={this.props.editorDisabled} as='a'>
+        {this.chooseEditor()}
       </Menu.Item>
     )
   }

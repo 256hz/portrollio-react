@@ -7,15 +7,49 @@ import LoggedIn from './components/LoggedIn'
 import Editor from './components/Editor'
 const apiURL = 'http://localhost:3000/api/v1/'
 
+const DEFAULT_STATE = {
+  jobs: [],
+  githubs: [],
+  interests: [],
+  skills: [],
+  honors: [],
+  links: [],
+  users: [],
+
+  currentUser: {},
+  sidebarVisible: false,
+  editorDisabled: true,
+  loggedIn: false,
+  editing: {},
+  editingType: ''
+}
+
+let keys = Object.keys(DEFAULT_STATE)
+let anchors = keys.slice(0, 7)
+// used to automate fetch -- users & currentUser are created
+// together, and editing is a state, so they are excluded (length-3).
+// Add any other resources before the final 3 in the list.
+
 class App extends React.Component {
     constructor() {
         super()
-        this.state = {
-          sidebarVisible: false,
-          editorDisabled: true,
-          loggedIn: false,
-          editing: []
-        }
+        this.state = DEFAULT_STATE
+    }
+
+    componentDidMount() {
+      //automated fetch
+      anchors.forEach( a => {
+        fetch( apiURL + a )
+        .then( res => res.json() )
+        .then( json => this.setState({[a]: json}))
+      })
+      //special fetch for users
+      fetch( apiURL + 'users')
+      .then( res => res.json() )
+      .then( users => {
+        this.setState({users})
+        this.setState({currentUser: users[0]})
+      })
     }
 
     openSidebar = () => {
@@ -28,50 +62,41 @@ class App extends React.Component {
         method: 'GET',
         headers: {
           Authorization: `Bearer <token>`
-      }
-})
+        }
+      })
       this.setState({username: user, loggedIn: true})
     }
 
-    handleEdit = (content) => {
-      this.setState({editing: content, editorDisabled: false, sidebarVisible: true})
-    }
-
-    handleSubmit = (ev) => {
+    startEdit = (content, type) => {
       this.setState({
-        editing: {
-          ...this.state.editing,
-          [ev.target.first_name.name]: ev.target.first_name.value,
-          [ev.target.last_name.name]: ev.target.last_name.value,
-          [ev.target.email.name]: ev.target.email.value,
-          [ev.target.phone.name]: ev.target.phone.value
-        }
-      }, ()=> this.postEdit(this.state.editing))
+        editing: content,
+        editingType: type,
+        editorDisabled: false,
+        sidebarVisible: true
+      }, ()=>console.log('set up edit', this.state.editingType))
     }
 
-    postEdit = (editing) => {
-      console.log(editing);
-      fetch('http://localhost:3000/api/v1/users/'+editing.id, {
+    handleSubmit = (content) => {
+      console.log(content);
+      fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
         method: "PATCH",
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          ...editing
+          ...content
         })
       })
       .then(res => res.json())
       .then(json => {
+        let editingTypeCopy=this.state.editingType
         this.setState({
-          users: [json],
+          [editingTypeCopy]: json,
           sidebarVisible: false,
-          editorDisabled: true
-        }, ()=>console.log(this.state.users))
+          editorDisabled: true,
+          editingType: '',
+        })
       })
-    }
-
-    cleanUpEdit = () => {
-
     }
 
     render() {
@@ -96,9 +121,10 @@ class App extends React.Component {
                  </Menu.Item>
 
                  <Editor
-                  disabled={this.state.editorDisabled}
+                  editorDisabled={this.state.editorDisabled}
                   content={this.state.editing}
                   handleSubmit={this.handleSubmit}
+                  editingType={this.state.editingType}
                  />
 
                </Sidebar>
@@ -108,7 +134,17 @@ class App extends React.Component {
 
                 <Content
                   openSidebar={this.openSidebar}
-                  handleEdit={this.handleEdit}
+                  startEdit={this.startEdit}
+
+                  jobs={this.state.jobs}
+                  githubs={this.state.githubs}
+                  interests={this.state.interests}
+                  skills={this.state.skills}
+                  honors={this.state.honors}
+                  links={this.state.links}
+                  users={this.state.users}
+                  currentUser= {this.state.currentUser}
+                  editing={this.state.editing}
                 />
 
               </Segment>
