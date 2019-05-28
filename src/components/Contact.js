@@ -11,19 +11,18 @@ const parsePhoneNum = (num) => {
 const Contact = (props) => {
 
     return (
-      <Grid columns="equal" divided='vertically'>
+      <Grid columns="equal">
         <SectionHeading text="Contact" 
           getContent={_ => props.getContent(props.user, '#contact')} 
           editing={props.editing}
         />
-        <Grid.Row textAlign="center">
-              <span className="contact">
+        <Grid.Row>
+              <Grid.Column textAlign="right">
                 <a href={"mailto:"+props.user.email}>{props.user.email}</a>
-              </span>
-              <span> - </span>
-              <span className="contact">
+              </Grid.Column>
+              <Grid.Column textAlign="left">
                 <a href={"tel: +1"+ props.user.phone}>+1 {parsePhoneNum(props.user.phone)}</a>
-              </span>
+              </Grid.Column>
         </Grid.Row>
       </Grid>
     )
