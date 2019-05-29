@@ -13,7 +13,7 @@ export default class AboutMeEdit extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log(props.content)
+    // console.log(props.content)
     if (props.content.id !== state.content.id) {
       return {content: props.content}
     } else {
