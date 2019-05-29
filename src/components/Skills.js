@@ -9,6 +9,7 @@ const Skills = (props) => {
       startEdit={_ => props.startEdit(props.skills, 'skills')}
       editing={props.editing}
       loggedIn={props.loggedIn}
+      sectionEdit={true}
     />
       <Grid.Row columns={props.skills.length+8} padded="horizontally"
           verticalAlign="middle" textAlign="center">

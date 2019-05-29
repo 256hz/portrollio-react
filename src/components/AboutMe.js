@@ -10,6 +10,7 @@ const AboutMe = (props) => {
         startEdit={_ => props.startEdit(props.user, 'users')}
         editing={props.editing}
         loggedIn={props.loggedIn}
+        sectionEdit={true}
       />
 
       <Grid.Row columns={16}>

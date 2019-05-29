@@ -10,6 +10,7 @@ const Jobs = (props) => {
         getContent={_ => props.startEdit(props.jobs, '#jobs')}
         editing={props.editing}
         loggedIn={props.loggedIn}
+        sectionEdit={false}
       />
 
       <Grid.Row columns={16} padded="horizontally">
