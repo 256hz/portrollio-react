@@ -1,13 +1,14 @@
 import React from 'react'
 import SectionHeading from './SectionHeading'
-import { Grid, List } from 'semantic-ui-react';
+import { Grid, List, Button } from 'semantic-ui-react';
 
 const Jobs = (props) => {
   // let colors = ['orange', 'yellow', 'green', 'teal']
+  console.log(props.jobs)
   return(
     <Grid columns="equal">
-      <SectionHeading text="Positions" 
-        getContent={_ => props.getContent(props.jobs, '#jobs')} 
+      <SectionHeading text="Positions"
+        getContent={_ => props.startEdit(props.jobs, '#jobs')}
         editing={props.editing}
         loggedIn={props.loggedIn}
       />
@@ -19,8 +20,9 @@ const Jobs = (props) => {
           {props.jobs.map( (job,index) => {
             return(
             <Grid key={job.company}>
+              <Button onClick={_ => props.startEdit(job, 'jobs')} icon="pencil square"/>
               <Grid.Row key={job.title} width={12} padded="vertically">
-                  
+
                 <Grid.Column width={2} className="image-circle-small-job" verticalAlign="middle">
                     <img className="image-circle-small-img" src={job.img_url} alt={job.company} />
                 </Grid.Column>
@@ -49,9 +51,9 @@ const Jobs = (props) => {
             )
           })}
         </Grid.Column>
-        
+
         <Grid.Column width={2}></Grid.Column>
-        
+
       </Grid.Row>
     </Grid>
   )

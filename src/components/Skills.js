@@ -3,7 +3,6 @@ import {Grid, Popup, Image} from 'semantic-ui-react'
 import SectionHeading from './SectionHeading'
 
 const Skills = (props) => {
-  console.log('in skills', props.skills)
   return (
   <Grid columns='equal'>
     <SectionHeading text="Primary Skillsets"
