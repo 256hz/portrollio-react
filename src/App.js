@@ -58,30 +58,26 @@ class App extends React.Component {
       this.setState({sidebarVisible: !this.state.sidebarVisible})
     }
 
-    login = (user, pass) => {
+    login = (ev, username, password) => {
+      ev.preventDefault()
       this.setState({message: ''})
       fetch('http://localhost:3000/api/v1/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          user: {
-            username: user,
-            password: pass
-          }
-        })
+        body: JSON.stringify({ user: {username, password}})
       }).then( res => res.json() )
         .then( json => {
-          if (json.message !== "Invalid username or password") {
-            localStorage.setItem('jwt', json)
-            this.setState({username: user, loggedIn: true})
+          console.log('returned:', json)
+          if (json && json.jwt) {
+            localStorage.setItem('jwt', json.jwt)
+            this.setState({username: username, loggedIn: true})
           } else {
-            localStorage.setItem('jwt', null)
-            this.setState({message: json.message})
-            this.setState({loggedIn: false})
+            localStorage.removeItem('jwt')
+            this.setState({message: json.message, loggedIn: false})
           }
-    })
+        })
   }
 
     logOut = () => {
@@ -93,7 +89,7 @@ class App extends React.Component {
     }
 
     startEdit = (content, type) => {
-      if (localStorage.getItem('jwt') !== "null") {
+      if (localStorage.getItem('jwt') !== '') {
         this.setState({
           editing: content,
           editingType: type,
@@ -106,11 +102,12 @@ class App extends React.Component {
     }
 
     handleSubmit = (content) => {
-      // let token = localStorage.getItem('jwt')
+      let token = localStorage.getItem('jwt')
+      console.log(token)
       fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
         method: "PATCH",
         headers: {
-          'Content-Type': 'application/json'
+          'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
           ...content
@@ -173,7 +170,7 @@ class App extends React.Component {
                    Close
                  </Menu.Item>
                  <Menu.Item as='a'>
-                    {(this.state.loggedIn && localStorage.getItem('jwt') !== "null") 
+                    {(this.state.loggedIn && localStorage.getItem('jwt') !== '') 
                       ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
                       : <Login login={this.login} message={this.state.message}/>
                     }
