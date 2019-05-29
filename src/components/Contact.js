@@ -16,6 +16,7 @@ const Contact = (props) => {
           getContent={_ => props.getContent(props.user, '#contact')} 
           editing={props.editing}
           loggedIn={props.loggedIn}
+          sectionEdit={true}
         />
         <Grid.Row>
               <Grid.Column textAlign="right">

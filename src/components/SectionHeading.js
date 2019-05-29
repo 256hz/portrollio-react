@@ -4,33 +4,33 @@ import {Link} from 'react-router-dom'
 
 const SectionHeading = (props) => {
 
-return (
-  <Grid columns={16}>
-    <Grid.Column width={16}>{' '}</Grid.Column>
-    <Grid.Column width={16} textAlign="center">
-        <Link to="/#nav"><Icon name="triangle up"/></Link>
-    </Grid.Column>
-
-    <Grid.Row className="heading-bg">
-      <Grid.Column width={1} textAlign="right" verticalAlign="middle">
-          {(props.loggedIn && localStorage.getItem('jwt') !== "null")
-            ? <Button onClick={props.startEdit} icon="pencil square"/>
-            : null}
+  return (
+    <Grid columns={16}>
+      <Grid.Column width={16}>{' '}</Grid.Column>
+      <Grid.Column width={16} textAlign="center">
+          <Link to="/#nav"><Icon name="triangle up"/></Link>
       </Grid.Column>
 
-      <Grid.Column width={15}>
-        <div>
-            <span className="font-size-large heading-font">{props.text}</span>
-        </div>
-      </Grid.Column>
-    </Grid.Row>
+      <Grid.Row className="heading-bg">
+        <Grid.Column width={1} textAlign="right" verticalAlign="middle">
+            {(props.sectionEdit && props.loggedIn && localStorage.getItem('jwt') !== "null")
+              ? <Button onClick={props.startEdit} icon="pencil square"/>
+              : null}
+        </Grid.Column>
 
-    <Grid.Column width={16}>{' '}</Grid.Column>
-    <Grid.Column width={16}>{' '}</Grid.Column>
+        <Grid.Column width={15}>
+          <div>
+              <span className="font-size-large heading-font">{props.text}</span>
+          </div>
+        </Grid.Column>
+      </Grid.Row>
 
-  </Grid>
-)
-}
+      <Grid.Column width={16}>{' '}</Grid.Column>
+      <Grid.Column width={16}>{' '}</Grid.Column>
+
+    </Grid>
+  )
+  }
 
 export default SectionHeading
         // <Grid.Row className="heading-font font-size-large">

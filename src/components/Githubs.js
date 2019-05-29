@@ -11,6 +11,7 @@ const Githubs = (props) => {
         getContent={ _ => props.getContent(props.githubs)} 
         editing={props.editing}
         loggedIn={props.loggedIn}
+        sectionEdit={false}
       />
       <Grid.Row>
         <Card.Group>
