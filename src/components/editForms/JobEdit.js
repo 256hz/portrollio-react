@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Icon } from 'semantic-ui-react'
 
 export default class JobEdit extends Component {
 
@@ -34,6 +34,50 @@ export default class JobEdit extends Component {
       content:{
         ...this.state.content,
         [ev.target.name]: copy
+      }
+    })
+  }
+
+  handleAddSkill = () => {
+    let skillsCopy = this.state.content.skills_used
+    skillsCopy.push('')
+    this.setState({
+      content:{
+        ...this.state.content,
+        skills_used: skillsCopy
+      }
+    })
+  }
+
+  handleRemoveSkill = (i) => {
+    let skillCopy = this.state.content.skills_used
+    skillCopy.splice(i,1)
+    this.setState({
+      content:{
+        ...this.state.content,
+        responsibilities: skillCopy
+      }
+    })
+  }
+
+  handleAddResp = () => {
+    let resCopy = this.state.content.responsibilities
+    resCopy.push('')
+    this.setState({
+      content:{
+        ...this.state.content,
+        responsibilities: resCopy
+      }
+    })
+  }
+
+  handleRemoveResp = (i) => {
+    let resCopy = this.state.content.responsibilities
+    resCopy.splice(i,1)
+    this.setState({
+      content:{
+        ...this.state.content,
+        responsibilities: resCopy
       }
     })
   }
@@ -104,16 +148,26 @@ export default class JobEdit extends Component {
 
         <label>Responsibilities</label>
         {this.state.content.responsibilities.map((res, i) => {
-          return <Form.Field key={i}>
-            <input name="responsibilities" value={this.state.content.responsibilities[i]} onChange={(ev) => this.handleNestedChange(ev, i)}/>
-          </Form.Field>
+          return (
+            <Form.Group key={i}>
+              <input name="responsibilities" value={this.state.content.responsibilities[i]} onChange={(ev) => this.handleNestedChange(ev, i)}/>
+              <Button negative type="button" onClick={() => this.handleRemoveResp(i)}> - </Button>
+            </Form.Group>
+          )
         })}
+        <Button type="button" onClick={this.handleAddResp}>Add New Responsibility</Button>
+        <br></br>
+
         <label>Skills Used</label>
         {this.state.content.skills_used.map((res, i) => {
-          return <Form.Field key={i}>
-            <input name="skills_used" value={this.state.content.skills_used[i]} onChange={(ev) => this.handleNestedChange(ev, i)}/>
-          </Form.Field>
+          return (
+            <Form.Group key={i}>
+              <input name="skills_used" value={this.state.content.skills_used[i]} onChange={(ev) => this.handleNestedChange(ev, i)}/>
+              <Button negative type="button" onClick={() => this.handleRemoveSkill(i)}> - </Button>
+            </Form.Group>
+          )
         })}
+        <Button type="button" onClick={this.handleAddSkill}>Add New Skill</Button>
 
         <Form.Field>
           <label>Image URL</label>
