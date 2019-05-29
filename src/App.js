@@ -110,6 +110,7 @@ class App extends React.Component {
 
     handleSubmit = (content) => {
       let token = localStorage.getItem('jwt')
+      console.log({token})
       fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
         method: "PATCH",
         headers: {
