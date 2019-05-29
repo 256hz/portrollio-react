@@ -7,8 +7,8 @@ import {Grid, Card} from 'semantic-ui-react'
 const Githubs = (props) => {
   return (
     <Grid columns="equal" divided='vertically'>
-      <SectionHeading text="Featured Repos" 
-        getContent={ _ => props.getContent(props.githubs)} 
+      <SectionHeading text="Featured Repos"
+        getContent={ _ => props.getContent(props.githubs)}
         editing={props.editing}
         loggedIn={props.loggedIn}
         sectionEdit={false}
@@ -18,7 +18,7 @@ const Githubs = (props) => {
           <br />
           {props.githubs.map( (github, index) => {
             return <Grid.Column key={github.repo_name + index}>
-              <Github github={github} />
+              <Github github={github} startEdit={props.startEdit}/>
             </Grid.Column>
           })}
         </Card.Group>
@@ -49,7 +49,7 @@ export default Githubs
 //   display: 'inline'
 // }
 
-    
+
     // <div class="ui three column doubling stackable grid container">
           // <div className="">
           //   <div className="image-circle-small">

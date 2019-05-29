@@ -61,7 +61,7 @@ class Content extends Component {
         <Grid.Row key="github" id="github">
           <Grid.Column>
             <Githubs githubs={this.props.githubs} editing={this.props.editing}
-              startEdit={this.startEdit} loggedIn={this.props.loggedIn}
+              startEdit={this.props.startEdit} loggedIn={this.props.loggedIn}
             />
           </Grid.Column>
         </Grid.Row>

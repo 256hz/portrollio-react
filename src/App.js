@@ -103,17 +103,18 @@ class App extends React.Component {
 
     handleSubmit = (content) => {
       let token = localStorage.getItem('jwt')
-      console.log(token)
       fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
         method: "PATCH",
         headers: {
-          'Authorization': 'Bearer ' + token
+          'Authorization': 'Bearer '+token,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           ...content
         })
       })
       .then(res => res.json())
+      .catch(error => console.log(error))
       .then(json => {
         let editingTypeCopy=this.state.editingType
         switch(editingTypeCopy) {
@@ -144,10 +145,18 @@ class App extends React.Component {
               editingType: '',
             })
             break
-          default:
-            let arrCopy = [...this.state[editingTypeCopy]]
+          case "githubs":
+            let githubsCopy = this.state.githubs.map(github => {
+              return (github.id === content.id) ? content : github
+            })
             this.setState({
-              [editingTypeCopy]: json,
+              githubs: githubsCopy,
+              sidebarVisible: false,
+              editingType: '',
+            })
+            break
+          default:
+            this.setState({
               sidebarVisible: false,
               editingType: '',
           })
