@@ -13,7 +13,7 @@ return (
 
     <Grid.Row className="heading-bg">
       <Grid.Column width={1} textAlign="right" verticalAlign="middle">
-          {props.loggedIn
+          {(props.loggedIn && localStorage.getItem('jwt') !== "null")
             ? <Button onClick={props.startEdit} icon="pencil square"/>
             : null}
       </Grid.Column>

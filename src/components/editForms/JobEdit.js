@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Menu, Segment, Sidebar, Form, Button } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 
 export default class JobEdit extends Component {
 

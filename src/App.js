@@ -20,7 +20,7 @@ const DEFAULT_STATE = {
   currentUser: {},
   sidebarVisible: false,
   editorDisabled: true,
-  loggedIn: true,
+  loggedIn: false,
   editing: {},
   editingType: ''
 }
@@ -35,6 +35,7 @@ class App extends React.Component {
     constructor() {
         super()
         this.state = DEFAULT_STATE
+        localStorage.setItem('jwt', null)
     }
 
     componentDidMount() {
@@ -59,7 +60,6 @@ class App extends React.Component {
 
     login = (user, pass) => {
       this.setState({message: ''})
-      console.log('super secure', user, pass)
       fetch('http://localhost:3000/api/v1/login', {
         method: 'POST',
         headers: {
@@ -73,12 +73,13 @@ class App extends React.Component {
         })
       }).then( res => res.json() )
         .then( json => {
-          console.log(json)
           if (json.message !== "Invalid username or password") {
             localStorage.setItem('jwt', json)
             this.setState({username: user, loggedIn: true})
           } else {
+            localStorage.setItem('jwt', null)
             this.setState({message: json.message})
+            this.setState({loggedIn: false})
           }
     })
   }
@@ -92,16 +93,20 @@ class App extends React.Component {
     }
 
     startEdit = (content, type) => {
-      this.setState({
-        editing: content,
-        editingType: type,
-        editorDisabled: false,
-        sidebarVisible: true
-      }, ()=>console.log('set up edit', this.state.editingType))
+      if (localStorage.getItem('jwt') !== "null") {
+        this.setState({
+          editing: content,
+          editingType: type,
+          editorDisabled: false,
+          sidebarVisible: true
+        }, ()=>console.log('set up edit', this.state.editingType))
+      } else {
+        alert('Please log in to edit')
+      }
     }
 
     handleSubmit = (content) => {
-      console.log(content);
+      // let token = localStorage.getItem('jwt')
       fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
         method: "PATCH",
         headers: {
@@ -168,7 +173,7 @@ class App extends React.Component {
                    Close
                  </Menu.Item>
                  <Menu.Item as='a'>
-                    {this.state.loggedIn
+                    {(this.state.loggedIn && localStorage.getItem('jwt') !== "null") 
                       ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
                       : <Login login={this.login} message={this.state.message}/>
                     }

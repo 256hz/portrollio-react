@@ -4,7 +4,6 @@ import { Grid, List, Button } from 'semantic-ui-react';
 
 const Jobs = (props) => {
   // let colors = ['orange', 'yellow', 'green', 'teal']
-  console.log(props.jobs)
   return(
     <Grid columns="equal">
       <SectionHeading text="Positions"
