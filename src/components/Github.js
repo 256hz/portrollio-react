@@ -19,7 +19,10 @@ const Github = (props) => {
         <Card.Meta>         {gh.summary}        </Card.Meta>
         <Card.Description>  {gh.contribution}   </Card.Description>
       </div>
-      <Button floated='right' size="mini" onClick={_ => props.startEdit(gh, 'githubs')} icon="pencil square"/>
+      {props.loggedIn 
+        ? <Button floated='right' size="mini" onClick={_ => props.startEdit(gh, 'githubs')} icon="pencil square"/>
+        : null
+      }
     </Card.Content>
   </Card>
   )
