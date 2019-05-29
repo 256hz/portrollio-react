@@ -20,7 +20,10 @@ const Jobs = (props) => {
           {props.jobs.map( (job,index) => {
             return(
             <Grid key={job.company}>
-              <Button onClick={_ => props.startEdit(job, 'jobs')} icon="pencil square"/>
+              {props.loggedIn 
+                ? <Button onClick={_ => props.startEdit(job, 'jobs')} icon="pencil square"/>
+                : null
+              }
               <Grid.Row key={job.title} width={12} padded="vertically">
 
                 <Grid.Column width={2} className="image-circle-small-job" verticalAlign="middle">

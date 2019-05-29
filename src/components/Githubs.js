@@ -18,7 +18,7 @@ const Githubs = (props) => {
           <br />
           {props.githubs.map( (github, index) => {
             return <Grid.Column key={github.repo_name + index}>
-              <Github github={github} startEdit={props.startEdit}/>
+              <Github github={github} startEdit={props.startEdit} loggedIn={props.loggedIn}/>
             </Grid.Column>
           })}
         </Card.Group>
