@@ -16,6 +16,7 @@ const DEFAULT_STATE = {
   links: [],
   users: [],
 
+  message: '',
   currentUser: {},
   sidebarVisible: false,
   editorDisabled: true,
@@ -57,21 +58,37 @@ class App extends React.Component {
     }
 
     login = (user, pass) => {
+      this.setState({message: ''})
       console.log('super secure', user, pass)
-      fetch('http://localhost:3000/api/v1/profile', {
-        method: 'GET',
+      fetch('http://localhost:3000/api/v1/login', {
+        method: 'POST',
         headers: {
-          Authorization: `Bearer <token>`
-        }
-      })
-      this.setState({username: user, loggedIn: true})
-    }
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: {
+            username: user,
+            password: pass
+          }
+        })
+      }).then( res => res.json() )
+        .then( json => {
+          console.log(json)
+          if (json.message !== "Invalid username or password") {
+            localStorage.setItem('jwt', json)
+            this.setState({username: user, loggedIn: true})
+          } else {
+            this.setState({message: json.message})
+          }
+    })
+  }
 
     logOut = () => {
       this.setState({
         loggedIn: false,
         sidebarVisible: false
       })
+      localStorage.setItem('jwt', null)
     }
 
     startEdit = (content, type) => {
@@ -149,7 +166,7 @@ class App extends React.Component {
                  <Menu.Item as='a'>
                     {this.state.loggedIn
                       ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
-                      : <Login login={this.login} />
+                      : <Login login={this.login} message={this.state.message}/>
                     }
                  </Menu.Item>
 

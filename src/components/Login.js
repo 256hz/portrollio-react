@@ -12,6 +12,7 @@ class Login extends React.Component {
     render() { 
         return(
         <Grid textAlign="center">
+            {this.props.message}
             <Form>
                 <Form.Group widths={1}>
                     <Form.Input inverted
