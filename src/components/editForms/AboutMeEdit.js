@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Menu, Segment, Sidebar, Form, Button } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 
 export default class AboutMeEdit extends Component {
 
@@ -16,6 +16,8 @@ export default class AboutMeEdit extends Component {
     console.log(props.content)
     if (props.content.id !== state.content.id) {
       return {content: props.content}
+    } else {
+      return null
     }
   }
 

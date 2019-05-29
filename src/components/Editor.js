@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Menu, Segment, Sidebar, Form, Button } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import AboutMeEdit from './editForms/AboutMeEdit'
 import SkillsEdit from './editForms/SkillsEdit'
 import JobEdit from './editForms/JobEdit'
