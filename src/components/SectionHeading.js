@@ -13,7 +13,7 @@ const SectionHeading = (props) => {
 
       <Grid.Row className="heading-bg">
         <Grid.Column width={1} textAlign="right" verticalAlign="middle">
-            {(props.sectionEdit && props.loggedIn && localStorage.getItem('jwt') !== "null")
+            {(props.sectionEdit && props.loggedIn && localStorage.getItem('jwt') !== '')
               ? <Button onClick={props.startEdit} icon="pencil square"/>
               : null}
         </Grid.Column>

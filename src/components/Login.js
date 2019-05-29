@@ -33,7 +33,7 @@ class Login extends React.Component {
                     />
                 </Form.Group>
                 <Form.Button inverted
-                    onClick={_ => this.props.login(this.state.user, this.state.pass)}
+                    onClick={ev => this.props.login(ev, this.state.user, this.state.pass)}
                 >Login</Form.Button>
             </Form>
         </Grid>
