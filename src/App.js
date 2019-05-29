@@ -20,7 +20,7 @@ const DEFAULT_STATE = {
   currentUser: {},
   sidebarVisible: false,
   editorDisabled: true,
-  loggedIn: false,
+  loggedIn: true,
   editing: {},
   editingType: ''
 }
@@ -92,7 +92,6 @@ class App extends React.Component {
     }
 
     startEdit = (content, type) => {
-      console.log(content);
       this.setState({
         editing: content,
         editingType: type,
@@ -126,14 +125,20 @@ class App extends React.Component {
             })
             break
           case "skills":
-            let skillsCopy = [...this.state.skills]
-            skillsCopy.map(skill => {
+            let skillsCopy = this.state.skills.map(skill => {
               return (skill.id === content.id) ? content : skill
             })
             this.setState({
               skills: skillsCopy,
+            })
+            break
+          case "jobs":
+            let jobsCopy = this.state.jobs.map(job => {
+              return (job.id === content.id) ? content : job
+            })
+            this.setState({
+              jobs: jobsCopy,
               sidebarVisible: false,
-              editorDisabled: true,
               editingType: '',
             })
             break
@@ -142,7 +147,6 @@ class App extends React.Component {
             this.setState({
               [editingTypeCopy]: json,
               sidebarVisible: false,
-              editorDisabled: true,
               editingType: '',
           })
         }
