@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Image} from 'semantic-ui-react'
+import {Card, Image, Button} from 'semantic-ui-react'
 
 
 const fancyName = (name) => {
@@ -10,13 +10,16 @@ const Github = (props) => {
   let gh = props.github
   let _name = fancyName(gh.repo_name)
   return (
-  <Card href={`https://github.com/${gh.repo_owner}/${gh.repo_name}`} 
-        target="_blank" className="card-height">
+  <Card >
     <Card.Content>
-      <Image floated='right' size='mini' src={gh.img_url} />
-      <Card.Header>       {_name}             </Card.Header>
-      <Card.Meta>         {gh.summary}        </Card.Meta>
-      <Card.Description>  {gh.contribution}   </Card.Description>
+      <div href={`https://github.com/${gh.repo_owner}/${gh.repo_name}`}
+          target="_blank" className="card-height">
+        <Image floated='right' size='mini' src={gh.img_url} />
+        <Card.Header>       {_name}             </Card.Header>
+        <Card.Meta>         {gh.summary}        </Card.Meta>
+        <Card.Description>  {gh.contribution}   </Card.Description>
+      </div>
+      <Button floated='right' size="mini" onClick={_ => props.startEdit(gh, 'githubs')} icon="pencil square"/>
     </Card.Content>
   </Card>
   )

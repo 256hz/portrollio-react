@@ -81,6 +81,7 @@ export default class JobEdit extends Component {
           <Form.Field>
             <label>End Month</label>
             <select name="end_month" value={this.state.content.end_month} onChange={this.handleChange}>
+              <option value='nil'>None</option>
               <option value="Jan">January</option>
               <option value="Feb">February</option>
               <option value="Mar">March</option>
