@@ -73,7 +73,7 @@ class App extends React.Component {
         body: JSON.stringify({ user: {username, password}})
       }).then( res => res.json() )
         .then( json => {
-          console.log('returned:', json)
+          // console.log('returned:', json)
           if (json && json.jwt) {
             localStorage.setItem('jwt', json.jwt)
             localStorage.setItem('username', username)
@@ -102,7 +102,7 @@ class App extends React.Component {
           editingType: type,
           editorDisabled: false,
           sidebarVisible: true
-        }, ()=>console.log('set up edit', this.state.editingType))
+        }) //, ()=>console.log('set up edit', this.state.editingType))
       } else {
         alert('Please log in to edit')
       }
@@ -110,11 +110,10 @@ class App extends React.Component {
 
     handleSubmit = (content) => {
       let token = localStorage.getItem('jwt')
-      console.log({token})
       fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
         method: "PATCH",
         headers: {
-          'Authorization': 'Bearer '+token,
+          'Authorization': 'Bearer ' + token,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
