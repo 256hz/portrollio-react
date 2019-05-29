@@ -3,6 +3,7 @@ import { Menu } from 'semantic-ui-react'
 import AboutMeEdit from './editForms/AboutMeEdit'
 import SkillsEdit from './editForms/SkillsEdit'
 import JobEdit from './editForms/JobEdit'
+import GithubEdit from './editForms/GithubEdit'
 
 export default class Editor extends Component {
 
@@ -21,6 +22,9 @@ export default class Editor extends Component {
         break
       case "jobs":
         return <JobEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
+        break
+      case "githubs":
+        return <GithubEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
         break
       default:
         return null

@@ -106,10 +106,11 @@ class App extends React.Component {
     }
 
     handleSubmit = (content) => {
-      // let token = localStorage.getItem('jwt')
+      let token = localStorage.getItem('jwt')
       fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
         method: "PATCH",
         headers: {
+          'Authorization': 'Bearer '+token,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -117,6 +118,7 @@ class App extends React.Component {
         })
       })
       .then(res => res.json())
+      .catch(error => console.log(error))
       .then(json => {
         let editingTypeCopy=this.state.editingType
         switch(editingTypeCopy) {
@@ -147,10 +149,18 @@ class App extends React.Component {
               editingType: '',
             })
             break
-          default:
-            let arrCopy = [...this.state[editingTypeCopy]]
+          case "githubs":
+            let githubsCopy = this.state.githubs.map(github => {
+              return (github.id === content.id) ? content : github
+            })
             this.setState({
-              [editingTypeCopy]: json,
+              githubs: githubsCopy,
+              sidebarVisible: false,
+              editingType: '',
+            })
+            break
+          default:
+            this.setState({
               sidebarVisible: false,
               editingType: '',
           })
@@ -173,7 +183,7 @@ class App extends React.Component {
                    Close
                  </Menu.Item>
                  <Menu.Item as='a'>
-                    {(this.state.loggedIn && localStorage.getItem('jwt') !== "null") 
+                    {(this.state.loggedIn && localStorage.getItem('jwt') !== "null")
                       ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
                       : <Login login={this.login} message={this.state.message}/>
                     }
