@@ -88,6 +88,7 @@ class App extends React.Component {
         loggedIn: false,
         sidebarVisible: false
       })
+      localStorage.setItem('jwt', null)
     }
 
     startEdit = (content, type) => {
