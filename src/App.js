@@ -19,26 +19,30 @@ const DEFAULT_STATE = {
   message: '',
   currentUser: {},
   sidebarVisible: false,
-  editorDisabled: true,
   loggedIn: false,
+  editorDisabled: true,
   editing: {},
   editingType: ''
 }
 
 let keys = Object.keys(DEFAULT_STATE)
 let anchors = keys.slice(0, 7)
-// used to automate fetch -- users & currentUser are created
-// together, and editing is a state, so they are excluded (length-3).
-// Add any other resources before the final 3 in the list.
+// used to automate fetch -- the first 7 entries in default state
+// are the names of the resources we want to fetch.
 
 class App extends React.Component {
     constructor() {
         super()
         this.state = DEFAULT_STATE
-        localStorage.setItem('jwt', null)
     }
 
     componentDidMount() {
+      //check for logged in user
+      if (!!localStorage.jwt && !!localStorage.username) {
+        this.setState({loggedIn: true, username: localStorage.username})
+      } else {
+        this.setState({loggedIn: false})
+      }
       //automated fetch
       anchors.forEach( a => {
         fetch( apiURL + a )
@@ -72,10 +76,12 @@ class App extends React.Component {
           console.log('returned:', json)
           if (json && json.jwt) {
             localStorage.setItem('jwt', json.jwt)
+            localStorage.setItem('username', username)
             this.setState({username: username, loggedIn: true})
           } else {
             localStorage.removeItem('jwt')
-            this.setState({message: json.message, loggedIn: false})
+            localStorage.setItem('username', username)
+            this.setState({username: '', message: json.message, loggedIn: false})
           }
         })
   }
@@ -85,7 +91,8 @@ class App extends React.Component {
         loggedIn: false,
         sidebarVisible: false
       })
-      localStorage.setItem('jwt', null)
+      localStorage.removeItem('jwt')
+      localStorage.removeItem('username')
     }
 
     startEdit = (content, type) => {
@@ -179,7 +186,7 @@ class App extends React.Component {
                    Close
                  </Menu.Item>
                  <Menu.Item as='a'>
-                    {(this.state.loggedIn && localStorage.getItem('jwt') !== '') 
+                    {(this.state.loggedIn && localStorage.getItem('jwt')) 
                       ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
                       : <Login login={this.login} message={this.state.message}/>
                     }
