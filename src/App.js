@@ -22,7 +22,10 @@ const DEFAULT_STATE = {
   loggedIn: false,
   editorDisabled: true,
   editing: {},
-  editingType: ''
+  editingType: '',
+
+  creating: {},
+  creatingType: ''
 }
 
 let keys = Object.keys(DEFAULT_STATE)
@@ -100,11 +103,29 @@ class App extends React.Component {
         this.setState({
           editing: content,
           editingType: type,
-          editorDisabled: false,
+          creatingType: '',
           sidebarVisible: true
         }) //, ()=>console.log('set up edit', this.state.editingType))
       } else {
         alert('Please log in to edit')
+      }
+    }
+
+    startNew = (type) => {
+      if (localStorage.getItem('jwt') !== '') {
+        this.setState({
+          editing: {},
+          editingType: '',
+          creating: {
+            content: {
+              user_id: this.state.currentUser.id
+            }
+          },
+          creatingType: type,
+          sidebarVisible: true
+        }, ()=>console.log('set up new', this.state.creatingType))
+      } else {
+        alert('Please log in to add ' + this.state.creatingType)
       }
     }
 
@@ -171,6 +192,46 @@ class App extends React.Component {
       })
     }
 
+    handleCreate = (content) => {
+      let token = localStorage.getItem('jwt')
+      console.log(this.state.currentUser.id);
+      fetch('http://localhost:3000/api/v1/'+this.state.creatingType, {
+        method: "POST",
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...content,
+          user_id: this.state.currentUser.id
+        })
+      })
+      .then(res => res.json())
+      .catch(error => console.log(error))
+      .then(json => {
+        let creatingTypeCopy=this.state.creatingType
+        switch(creatingTypeCopy) {
+          case "skills":
+            this.setState({
+              skills: [
+                ...this.state.skills,
+                json
+              ]
+            })
+            break
+          case "jobs":
+            console.log('here');
+            this.setState({
+              jobs: [
+                ...this.state.jobs,
+                json
+              ]
+            })
+            break
+        }
+      })
+    }
+
     render() {
         return(
           <Sidebar.Pushable as={Segment} className="gray-bg fix-sidebar">
@@ -186,7 +247,7 @@ class App extends React.Component {
                    Close
                  </Menu.Item>
                  <Menu.Item as='a'>
-                    {(this.state.loggedIn && localStorage.getItem('jwt')) 
+                    {(this.state.loggedIn && localStorage.getItem('jwt'))
                       ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
                       : <Login login={this.login} message={this.state.message}/>
                     }
@@ -195,7 +256,10 @@ class App extends React.Component {
                  <Editor
                   editorDisabled={this.state.editorDisabled}
                   editing={this.state.editing}
+                  creatingType={this.state.creatingType}
+                  creating={this.state.creating}
                   handleSubmit={this.handleSubmit}
+                  handleCreate={this.handleCreate}
                   editingType={this.state.editingType}
                   startEdit={this.startEdit}
                  />
@@ -208,6 +272,7 @@ class App extends React.Component {
                 <Content
                   openSidebar={this.openSidebar}
                   startEdit={this.startEdit}
+                  startNew={this.startNew}
 
                   jobs={this.state.jobs}
                   githubs={this.state.githubs}
