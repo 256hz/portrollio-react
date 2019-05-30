@@ -65,7 +65,7 @@ class App extends React.Component {
     login = (ev, username, password) => {
       ev.preventDefault()
       this.setState({message: ''})
-      fetch('http://localhost:3000/api/v1/login', {
+      fetch(apiURL + 'login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -110,7 +110,7 @@ class App extends React.Component {
 
     handleSubmit = (content) => {
       let token = localStorage.getItem('jwt')
-      fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
+      fetch(apiURL+this.state.editingType+'/'+content.id, {
         method: "PATCH",
         headers: {
           'Authorization': 'Bearer ' + token,
@@ -171,6 +171,57 @@ class App extends React.Component {
       })
     }
 
+    shiftOrder = (skill, right) => {
+      let skills = this.state.skills.sort( (a,b) => a.order_id - b.order_id )
+      let orderIds = skills.map( s => s.order_id )
+      let curIndex = orderIds.indexOf( skill.order_id )
+      let maxPos = orderIds.length-1
+
+      console.log({skills, skill, curIndex, maxPos})
+      console.log('input(id, order_id):', skills.map(s => s.id) + ' ' + orderIds)
+      console.log('skill(id, order_id):', skill.id + ' ' + skill.orderId)
+
+      if (curIndex === maxPos && right) {
+        console.log( 'going right at end')
+        let t = orderIds[maxPos]
+        orderIds[maxPos] = orderIds[0]
+        orderIds[0] = t
+      } else if (curIndex === 0 && !right) {
+        console.log( 'going left at beginning')
+        let t = orderIds[0]
+        orderIds[0] = orderIds[maxPos]
+        orderIds[maxPos] = t
+      } else {
+        if (right < 1) {right = -1}
+        else right = 1
+        console.log( 'moving', right, 'from', curIndex)
+        let t = orderIds[curIndex]
+        orderIds[curIndex] = orderIds[curIndex + right]
+        orderIds[curIndex + right] = t
+      }
+      console.log('output(id, order_id):', skills.map(s => s.id) + ' ' + orderIds)
+      
+      let token = localStorage.jwt
+
+      skills.forEach( (skill, index) => {
+        if (skill.order_id !== orderIds[index]) {
+          console.log('making skill.order_id '+skill.order_id+ ' into ' + orderIds[index])
+          skill.order_id = orderIds[index]
+          fetch(apiURL + 'skills/' + skill.id, {
+            method: "PATCH",
+            headers: {
+              'Authorization': 'Bearer ' + token,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({...skill})
+          }).then( res => res.json() )
+            .then( console.log )
+        }
+      })
+      this.setState({skills})
+    }
+  
+
     render() {
         return(
           <Sidebar.Pushable as={Segment} className="gray-bg fix-sidebar">
@@ -208,7 +259,7 @@ class App extends React.Component {
                 <Content
                   openSidebar={this.openSidebar}
                   startEdit={this.startEdit}
-
+                  shiftOrder={this.shiftOrder}
                   jobs={this.state.jobs}
                   githubs={this.state.githubs}
                   interests={this.state.interests}
