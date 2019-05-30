@@ -18,6 +18,10 @@
   padding-left: 10px;
 }
 
+.fix-sidebar {
+  transform: none !important;
+}
+
 .font-heading {
   font-family: 'Josefin Sans', sans-serif;
 }
@@ -185,6 +189,4 @@ img {
   text-align: justify;
 }
 
-.fix-sidebar {
-  transform: none !important;
-}
+
