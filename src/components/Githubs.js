@@ -12,6 +12,8 @@ const Githubs = (props) => {
         editing={props.editing}
         loggedIn={props.loggedIn}
         sectionEdit={false}
+        sectionNew={true}
+        startNew={_ => props.startNew('githubs')}
       />
       <Grid.Row>
         <Card.Group>

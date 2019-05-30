@@ -6,6 +6,7 @@ import JobEdit from './editForms/JobEdit'
 import GithubEdit from './editForms/GithubEdit'
 import SkillsCreate from './createForms/SkillsCreate'
 import JobsCreate from './createForms/JobsCreate'
+import GithubsCreate from './createForms/GithubsCreate'
 
 export default class Editor extends Component {
 
@@ -42,6 +43,9 @@ export default class Editor extends Component {
           break
         case "jobs":
           return <JobsCreate content={this.props.creating} handleCreate={this.props.handleCreate}/>
+          break
+        case "githubs":
+          return <GithubsCreate content={this.props.creating} handleCreate={this.props.handleCreate}/>
           break
         default:
           return null
