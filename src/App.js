@@ -247,8 +247,8 @@ class App extends React.Component {
 
     render() {
         return(
-          <Sidebar.Pushable as={Segment} className="gray-bg fix-sidebar">
-            <Sticky>
+          <Sidebar.Pushable as={Segment} className="fix-sidebar">
+            <Sticky >
               <Sidebar as={Menu} animation='overlay'
                  direction='right' icon='labeled'
                  inverted vertical
@@ -282,7 +282,7 @@ class App extends React.Component {
                </Sidebar>
              </Sticky>
              <Sidebar.Pusher dimmed={false}>
-              <Segment basic >
+              <Segment basic className="gray-bg">
 
                 <Content
                   openSidebar={this.openSidebar}
