@@ -9,9 +9,8 @@ const Nav = (props) => {
             <Link className="item font-heading" to="/#skills">  SKILLS</Link>
             <Link className="item font-heading" to="/#jobs">    JOBS</Link>
             <Link className="item font-heading" to="/#github"> GITHUB</Link>
-            <Link className="item font-heading" to="/#honors">  HONORS</Link>
             <Link className="item font-heading" to="/#contact"> CONTACT</Link>
-            <Link className="item" to="/" onClick={props.openSidebar}><Icon name="bars"/></Link>    
+            <Link className="item" to="/" onClick={props.openSidebar}><Icon name="bars"/></Link>
         </Menu>
     )
 }
