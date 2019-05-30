@@ -43,6 +43,7 @@ export default class SkillsEdit extends Component {
               <input name="img_url" value={this.state.content[i].img_url} onChange={(ev) => this.handleChange(ev, i)}/>
             </Form.Field>
             <Button type='submit'>Submit</Button>
+            <Button negative type='button' onClick={() => this.props.handleDelete(this.state.content[i])}>Delete</Button>
           </Form>
         )
       }

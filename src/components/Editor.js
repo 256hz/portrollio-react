@@ -21,13 +21,16 @@ export default class Editor extends Component {
           return <AboutMeEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} />
           break
         case "skills":
-          return <SkillsEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
+          return <SkillsEdit content={this.props.editing} handleSubmit={this.props.handleSubmit}
+          startEdit={this.props.startEdit} handleDelete={this.props.handleDelete}/>
           break
         case "jobs":
-          return <JobEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
+          return <JobEdit content={this.props.editing} handleSubmit={this.props.handleSubmit}
+          startEdit={this.props.startEdit} handleDelete={this.props.handleDelete}/>
           break
         case "githubs":
-          return <GithubEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
+          return <GithubEdit content={this.props.editing} handleSubmit={this.props.handleSubmit}
+          startEdit={this.props.startEdit} handleDelete={this.props.handleDelete}/>
           break
         default:
           return null
