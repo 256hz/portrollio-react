@@ -1,9 +1,9 @@
 import React from 'react'
 import SectionHeading from './SectionHeading'
-import { Grid, List, Button } from 'semantic-ui-react';
+import { Grid, List, Button, Icon } from 'semantic-ui-react';
 
 const Jobs = (props) => {
-  // let colors = ['orange', 'yellow', 'green', 'teal']
+  let jobs = props.jobs.sort( (a,b) => a.order_id - b.order_id )// let colors = ['orange', 'yellow', 'green', 'teal']
   return(
     <Grid columns="equal">
       <SectionHeading text="Positions"
@@ -15,19 +15,19 @@ const Jobs = (props) => {
         sectionNew={true}
       />
 
+
       <Grid.Row columns={16} padded="horizontally">
         <Grid.Column width={2}></Grid.Column>
-
         <Grid.Column width={12}>
-          {props.jobs.map( (job,index) => {
+          {jobs.map( (job,index) => {
             return(
+            
             <Grid key={job.company}>
+
+            <Grid.Row key={job.title} width={12} padded="vertically">
               {props.loggedIn
                 ? <Button onClick={_ => props.startEdit(job, 'jobs')} icon="pencil square"/>
-                : null
-              }
-              <Grid.Row key={job.title} width={12} padded="vertically">
-
+                : null}
                 <Grid.Column width={2} className="image-circle-small-job" verticalAlign="middle">
                     <img className="image-circle-small-img" src={job.img_url} alt={job.company} />
                 </Grid.Column>
@@ -43,14 +43,18 @@ const Jobs = (props) => {
               </Grid.Row>
 
               <Grid.Row className="font_size_medium">{job.summary}</Grid.Row>
-              <Grid.Row>
-                <List bulleted>
-                {
-                  job.responsibilities.map(res => {
-                    return <List.Item key={res} className="font_size_small">{res}</List.Item>
-                  })
-                }
-                </List>
+              <Grid.Row width={1}>
+                  <List bulleted>
+                  {job.responsibilities.map(res => {
+                      return <List.Item key={res} className="font_size_small">{res}</List.Item>
+                    })}
+                  </List>
+                  {props.loggedIn 
+                    ? <Button type="button" onClick={_ => props.shiftOrder('jobs', job, false)}><Icon name="up arrow"/></Button>
+                    : null}    
+                  {props.loggedIn
+                    ? <Button type="button" onClick={_ => props.shiftOrder('jobs', job, true)}><Icon name="down arrow"/></Button>     
+                    : null}
               </Grid.Row>
             </Grid>
             )
