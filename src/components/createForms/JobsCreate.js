@@ -1,21 +1,26 @@
 import React, { Component } from 'react'
 import { Form, Button, Icon } from 'semantic-ui-react'
 
-export default class JobEdit extends Component {
+const INITIALSTATE = {
+  content:{
+    company: '',
+    title: '',
+    summary: '',
+    start_month: '',
+    start_year: '',
+    end_month: 'jan',
+    end_year: '',
+    responsibilities: [''],
+    skills_used: [''],
+    img_url: ''
+  }
+}
+
+export default class JobsCreate extends Component {
 
   constructor(props){
     super(props)
-    this.state = {
-      content:{
-        id: -1
-      }
-    }
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (props.content.id !== state.content.id) {
-      return {content: props.content}
-    }
+    this.state = INITIALSTATE
   }
 
   handleChange = (ev) => {
@@ -82,9 +87,20 @@ export default class JobEdit extends Component {
     })
   }
 
+  handleCreate = () => {
+    this.props.handleCreate(this.state.content)
+    this.setState({
+      content: {
+        ...INITIALSTATE.content,
+        responsibilities: [''],
+        skills_used: ['']
+      }
+    })
+  }
+
   render(){
     return(
-      <Form inverted onSubmit={() => this.props.handleSubmit(this.state.content)}>
+      <Form inverted onSubmit={() => this.handleCreate(this.state.content)}>
         <Form.Field>
           <label>Company</label>
           <input name="company" value={this.state.content.company} onChange={this.handleChange}/>
@@ -146,7 +162,9 @@ export default class JobEdit extends Component {
           </Form.Field>
         </Form.Group>
 
-        <label>Responsibilities</label>
+        <Form.Field>
+          <label>Responsibilities</label>
+        </Form.Field>
         {this.state.content.responsibilities.map((res, i) => {
           return (
             <Form.Group key={i}>
@@ -158,7 +176,9 @@ export default class JobEdit extends Component {
         <Button type="button" onClick={this.handleAddResp}>Add New Responsibility</Button>
         <br></br>
 
-        <label>Skills Used</label>
+        <Form.Field>
+          <label>Skills Used</label>
+        </Form.Field>
         {this.state.content.skills_used.map((res, i) => {
           return (
             <Form.Group key={i}>
@@ -175,7 +195,6 @@ export default class JobEdit extends Component {
         </Form.Field>
 
         <Button type='submit'>Submit</Button>
-        <Button negative type="button" onClick={() => this.props.handleDelete(this.state.content)}>Delete</Button>
       </Form>
     )
   }

@@ -12,15 +12,18 @@ const SectionHeading = (props) => {
       </Grid.Column>
 
       <Grid.Row className="heading-bg">
-        <Grid.Column width={1} textAlign="right" verticalAlign="middle">
+        <Grid.Column width={2} textAlign="center" verticalAlign="middle">
             {(props.sectionEdit && props.loggedIn && localStorage.getItem('jwt') !== '')
               ? <Button onClick={props.startEdit} icon="pencil square"/>
               : null}
+              {(props.sectionNew && props.loggedIn && localStorage.getItem('jwt') !== '')
+              ? <Button onClick={props.startNew} icon="clone outline"/>
+              : null}
         </Grid.Column>
 
-        <Grid.Column width={15}>
+        <Grid.Column width={14}>
           <div>
-              <span className="font-size-large heading-font">{props.text}</span>
+            <span className="font-size-large heading-font">{props.text}</span>
           </div>
         </Grid.Column>
       </Grid.Row>

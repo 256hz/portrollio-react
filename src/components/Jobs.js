@@ -7,10 +7,12 @@ const Jobs = (props) => {
   return(
     <Grid columns="equal">
       <SectionHeading text="Positions"
-        getContent={_ => props.startEdit(props.jobs, '#jobs')}
+        startEdit={_ => props.startEdit(props.jobs, '#jobs')}
+        startNew={_ => props.startNew('jobs')}
         editing={props.editing}
         loggedIn={props.loggedIn}
         sectionEdit={false}
+        sectionNew={true}
       />
 
       <Grid.Row columns={16} padded="horizontally">
@@ -20,7 +22,7 @@ const Jobs = (props) => {
           {props.jobs.map( (job,index) => {
             return(
             <Grid key={job.company}>
-              {props.loggedIn 
+              {props.loggedIn
                 ? <Button onClick={_ => props.startEdit(job, 'jobs')} icon="pencil square"/>
                 : null
               }

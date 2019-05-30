@@ -47,6 +47,7 @@ class Content extends Component {
             <Skills skills={this.props.skills} editing={this.props.editing}
               startEdit={this.props.startEdit} loggedIn={this.props.loggedIn}
               shiftOrder={this.props.shiftOrder}
+              startNew={this.props.startNew}
             />
           </Grid.Column>
         </Grid.Row>
@@ -55,6 +56,7 @@ class Content extends Component {
           <Grid.Column>
             <Jobs jobs={this.props.jobs} editing={this.props.editing}
               startEdit={this.props.startEdit} loggedIn={this.props.loggedIn}
+              startNew={this.props.startNew}
             />
           </Grid.Column>
         </Grid.Row>

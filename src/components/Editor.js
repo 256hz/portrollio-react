@@ -4,6 +4,8 @@ import AboutMeEdit from './editForms/AboutMeEdit'
 import SkillsEdit from './editForms/SkillsEdit'
 import JobEdit from './editForms/JobEdit'
 import GithubEdit from './editForms/GithubEdit'
+import SkillsCreate from './createForms/SkillsCreate'
+import JobsCreate from './createForms/JobsCreate'
 
 export default class Editor extends Component {
 
@@ -12,29 +14,45 @@ export default class Editor extends Component {
     this.state = {}
   }
 
-  chooseEditor = () => {
-    switch (this.props.editingType) {
-      case "users":
-        return <AboutMeEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} />
-        break
-      case "skills":
-        return <SkillsEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
-        break
-      case "jobs":
-        return <JobEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
-        break
-      case "githubs":
-        return <GithubEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} startEdit={this.props.startEdit}/>
-        break
-      default:
-        return null
+  chooseContent = () => {
+    if (this.props.editingType) {
+      switch (this.props.editingType) {
+        case "users":
+          return <AboutMeEdit content={this.props.editing} handleSubmit={this.props.handleSubmit} />
+          break
+        case "skills":
+          return <SkillsEdit content={this.props.editing} handleSubmit={this.props.handleSubmit}
+          startEdit={this.props.startEdit} handleDelete={this.props.handleDelete}/>
+          break
+        case "jobs":
+          return <JobEdit content={this.props.editing} handleSubmit={this.props.handleSubmit}
+          startEdit={this.props.startEdit} handleDelete={this.props.handleDelete}/>
+          break
+        case "githubs":
+          return <GithubEdit content={this.props.editing} handleSubmit={this.props.handleSubmit}
+          startEdit={this.props.startEdit} handleDelete={this.props.handleDelete}/>
+          break
+        default:
+          return null
+      }
+    } else if (this.props.creatingType) {
+      switch (this.props.creatingType) {
+        case "skills":
+          return <SkillsCreate content={this.props.creating} handleCreate={this.props.handleCreate}/>
+          break
+        case "jobs":
+          return <JobsCreate content={this.props.creating} handleCreate={this.props.handleCreate}/>
+          break
+        default:
+          return null
+        }
     }
   }
 
   render(){
     return(
       <Menu.Item disabled={this.props.editorDisabled} as='a'>
-        {this.chooseEditor()}
+        {this.chooseContent()}
       </Menu.Item>
     )
   }
