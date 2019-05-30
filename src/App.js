@@ -181,10 +181,10 @@ class App extends React.Component {
         orderIds[0] = orderIds[maxPos]
         orderIds[maxPos] = t
       } else {
-        if (right < 1) {right = -1}
+        right ? let move = 1 : let move = -1 //if right is true, shift up; else shift down 
         let t = orderIds[curIndex]
-        orderIds[curIndex] = orderIds[curIndex + right]
-        orderIds[curIndex + right] = t
+        orderIds[curIndex] = orderIds[curIndex + move]
+        orderIds[curIndex + move] = t
       }
       
       group.forEach( (item, index) => {
