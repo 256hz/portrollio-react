@@ -61,6 +61,10 @@ export default class AboutMeEdit extends Component {
         <label>About Me</label>
         <textarea name="bio" value={this.state.content.bio} onChange={this.handleChange}/>
         </Form.Field>
+        <Form.Field>
+          <label>Image URL</label>
+          <input name="img_url" value={this.state.content.img_url} onChange={this.handleChange}/>
+        </Form.Field>
         <Button type='submit'>Submit</Button>
       </Form>
     )

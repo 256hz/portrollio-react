@@ -1,5 +1,6 @@
 import React from 'react'
-import {Grid} from 'semantic-ui-react'
+import {Grid, Icon} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import SectionHeading from './SectionHeading'
 
 const parsePhoneNum = (num) => {
@@ -11,20 +12,32 @@ const parsePhoneNum = (num) => {
 const Contact = (props) => {
 
     return (
-      <Grid columns="equal">
-        <SectionHeading text="Contact" 
-          getContent={_ => props.getContent(props.user, '#contact')} 
-          editing={props.editing}
-          loggedIn={props.loggedIn}
-          sectionEdit={true}
-        />
-        <Grid.Row>
-              <Grid.Column textAlign="right">
-                <a href={"mailto:"+props.user.email}>{props.user.email}</a>
-              </Grid.Column>
-              <Grid.Column textAlign="left">
-                <a href={"tel: +1"+ props.user.phone}>+1 {parsePhoneNum(props.user.phone)}</a>
-              </Grid.Column>
+
+      <Grid columns={16}>
+        <Grid.Column width={16}>{' '}</Grid.Column>
+
+        <Grid.Column width={16} textAlign="center">
+          <Link to="/#nav"><Icon name="triangle up"/></Link>
+        </Grid.Column>
+
+        <Grid.Row className="heading-bg">
+          <Grid.Column width={2} textAlign="center" verticalAlign="middle">
+          </Grid.Column>
+
+          <Grid.Column width={2} >
+            <div>
+              <span className="font-size-large heading-font">Contact</span>
+            </div>
+          </Grid.Column>
+          <Grid.Column width={4} textAlign="right">
+            <a href={"mailto:"+props.user.email}>{props.user.email}</a>
+          </Grid.Column>
+          <Grid.Column width={4} textAlign="left">
+            <a href={"tel: +1"+ props.user.phone}>+1 {parsePhoneNum(props.user.phone)}</a>
+          </Grid.Column>
+
+          <Grid.Column width={16}>{' '}</Grid.Column>
+          <Grid.Column width={16}>{' '}</Grid.Column>
         </Grid.Row>
       </Grid>
     )

@@ -23,7 +23,7 @@ const Github = (props) => {
       {props.loggedIn
         ? <Card.Content>
           <Button type="button" onClick={_ => props.shiftOrder('githubs', github, false)}><Icon name="left arrow"/></Button>
-          <Button type="button" onClick={_ => props.shiftOrder('githubs', github, true)}><Icon name="right arrow"/></Button>     
+          <Button type="button" onClick={_ => props.shiftOrder('githubs', github, true)}><Icon name="right arrow"/></Button>
           <Button floated='right' size="small" onClick={_ => props.startEdit(github, 'githubs')} icon="edit"/>
         </Card.Content>
         : null
