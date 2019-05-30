@@ -3,7 +3,7 @@ import SectionHeading from './SectionHeading'
 import { Grid, List, Button, Icon } from 'semantic-ui-react';
 
 const Jobs = (props) => {
-  let jobs = props.jobs.sort( (a,b) => a.order_id - b.order_id )// let colors = ['orange', 'yellow', 'green', 'teal']
+  let jobs = props.jobs.sort( (a,b) => a.order_id - b.order_id )
   return(
     <Grid columns="equal">
       <SectionHeading text="Positions"
