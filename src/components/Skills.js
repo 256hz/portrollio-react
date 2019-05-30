@@ -15,14 +15,14 @@ const Skills = (props) => {
       sectionEdit={true}
       sectionNew={true}
     />
-      <Grid.Row columns={props.skills.length+8} padded="horizontally"
+      <Grid.Row columns={props.skills.length*2} padded="horizontally"
           verticalAlign="middle" textAlign="center">
         <Grid.Column width={2}></Grid.Column>
-        
+
         {skills.map( skill => {
           return( <Grid.Column key={skill.name}>
             <Grid.Row>
-              {props.loggedIn 
+              {props.loggedIn
                 ? <Button type="button" onClick={_ => props.shiftOrder('skills', skill, false)}><Icon name="left arrow"/></Button>
                 : null}
               <Popup key={skill.name} header={skill.name}
@@ -33,12 +33,12 @@ const Skills = (props) => {
                 position="bottom center"
               />
             </Grid.Row>
-              {props.loggedIn 
+              {props.loggedIn
                 ? <Button type="button" onClick={_ => props.shiftOrder('skills', skill, true)}><Icon name="right arrow"/></Button>
                 : null}
           </Grid.Column>
         )})}
-        
+
         <Grid.Column width={2}></Grid.Column>
       </Grid.Row>
     <br />
