@@ -14,6 +14,7 @@ const Skills = (props) => {
       loggedIn={props.loggedIn}
       sectionEdit={true}
       sectionNew={true}
+      user={props.user}
     />
       <Grid.Row columns={props.skills.length*2} padded="horizontally"
           verticalAlign="middle" textAlign="center">

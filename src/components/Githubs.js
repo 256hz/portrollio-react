@@ -15,6 +15,7 @@ const Githubs = (props) => {
         sectionEdit={false}
         sectionNew={true}
         startNew={_ => props.startNew('githubs')}
+        user={props.user}
       />
       <Grid.Row>
         <Card.Group centered>

@@ -65,6 +65,15 @@ export default class AboutMeEdit extends Component {
           <label>Image URL</label>
           <input name="img_url" value={this.state.content.img_url} onChange={this.handleChange}/>
         </Form.Field>
+        <Form.Field>
+          <label>Color Theme</label>
+          <select name="color_theme" value={this.state.content.color_theme} onChange={this.handleChange}>
+              <option value="theme-default">Default</option>
+              <option value="theme-autumn">Autumn</option>
+              <option value="theme-ice">Ice</option>
+              <option value="theme-berries">Berries</option>
+          </select>
+        </Form.Field>
         <Button type='submit'>Submit</Button>
       </Form>
     )

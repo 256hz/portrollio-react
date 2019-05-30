@@ -11,6 +11,7 @@ const AboutMe = (props) => {
         editing={props.editing}
         loggedIn={props.loggedIn}
         sectionEdit={true}
+      user={props.user}
       />
 
       <Grid.Row columns={16}>

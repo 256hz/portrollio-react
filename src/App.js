@@ -1,6 +1,6 @@
-import React from 'react'
 import './App.css';
-import { Icon, Menu, Segment, Sidebar, Sticky, Divider } from 'semantic-ui-react'
+import React from 'react'
+import { Icon, Menu, Segment, Sidebar, Sticky } from 'semantic-ui-react'
 import Content from './components/Content'
 import Login from './components/Login'
 import LoggedIn from './components/LoggedIn'
@@ -282,7 +282,7 @@ class App extends React.Component {
                </Sidebar>
              </Sticky>
              <Sidebar.Pusher dimmed={false}>
-              <Segment basic className="gray-bg">
+              <Segment basic className={this.state.currentUser.color_theme}>
 
                 <Content
                   openSidebar={this.openSidebar}
