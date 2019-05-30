@@ -17,13 +17,11 @@ const Githubs = (props) => {
         startNew={_ => props.startNew('githubs')}
       />
       <Grid.Row>
-        <Card.Group>
+        <Card.Group centered>
           <br />
           {githubs.map( (github, index) => {
-            return <Grid.Column key={github.repo_name + index}>
-              <Github github={github} startEdit={props.startEdit} 
+            return <Github github={github} startEdit={props.startEdit}
                       loggedIn={props.loggedIn} shiftOrder={props.shiftOrder}/>
-            </Grid.Column>
           })}
         </Card.Group>
       </Grid.Row>
