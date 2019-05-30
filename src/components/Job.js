@@ -4,20 +4,20 @@ import { Card, List, Button, Grid, Image } from 'semantic-ui-react';
 const Job = (props) => {
   return(
         <Card raised>
-            <Card.Content>
-              <Image spaced floated="left" size="tiny" src={props.job.img_url} alt={props.job.company}/>
-              <Card.Header><span>{' '}</span></Card.Header>
-              <Card.Header>{props.job.title}</Card.Header>
-              <Card.Meta>{props.job.company}</Card.Meta>
-              <Card.Meta>{props.job.start_month} {props.job.start_year} - {props.job.end_month}
-                {' '}{props.job.end_year ? props.job.end_year : 'Present'}
-              </Card.Meta>
-            </Card.Content>
           <Card.Content>
-            <Card.Description>{props.job.summary}</Card.Description>
+            <Image spaced floated="left" size="tiny" src={props.job.img_url} alt={props.job.company}/>
+            <Card.Header>   {props.job.title}     </Card.Header>
+            <Card.Meta>     {props.job.company}   </Card.Meta>
+            <Card.Meta>     {props.job.start_month} {props.job.start_year} - {props.job.end_month}
+                            {' '}{props.job.end_year ? props.job.end_year : 'Present'}
+            </Card.Meta>
           </Card.Content>
           <Card.Content>
-            <Card.Meta>SKILLS USED</Card.Meta>
+            <Card.Meta>       SUMMARY               </Card.Meta>
+            <Card.Description>{props.job.summary}   </Card.Description>
+          </Card.Content>
+          <Card.Content>
+            <Card.Meta>       SKILLS USED           </Card.Meta>
             <Card.Description>
               <List bulleted>
                 {props.job.skills_used.map(skill => {
@@ -27,7 +27,7 @@ const Job = (props) => {
             </Card.Description>
           </Card.Content>
           <Card.Content>
-          <Card.Meta>RESPONSIBILITIES</Card.Meta>
+          <Card.Meta>         RESPONSIBILITIES      </Card.Meta>
             <Card.Description>
               <List bulleted>
                 {props.job.responsibilities.map(res => {
