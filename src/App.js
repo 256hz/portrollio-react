@@ -144,7 +144,7 @@ class App extends React.Component {
       .then(json => {
         let editingTypeCopy=this.state.editingType
         switch(editingTypeCopy) {
-          case "users": this.setState({users: [json], currentUser: json})            
+          case "users": this.setState({users: [json], currentUser: json})
             break
           case "skills": let skillsCopy = this.state.skills.map(skill => {
               return (skill.id === content.id) ? content : skill
@@ -159,7 +159,7 @@ class App extends React.Component {
           case "githubs": let githubsCopy = this.state.githubs.map(github => {
               return (github.id === content.id) ? content : github
             })
-            this.setState({githubs: githubsCopy}) 
+            this.setState({githubs: githubsCopy})
             break
           default: return null
         }
@@ -172,7 +172,7 @@ class App extends React.Component {
       let orderIds = group.map( s => s.order_id )
       let curIndex = orderIds.indexOf( item.order_id )
       let maxPos = orderIds.length-1
-      let move = next ? 1 : -1 //if next is true, shift up; else shift down 
+      let move = next ? 1 : -1 //if next is true, shift up; else shift down
 
       // console.log('shifting:', {incomingGroup, item, next})
       // console.log('to order_id:', item.order_id + move)
@@ -191,7 +191,7 @@ class App extends React.Component {
         orderIds[curIndex] = orderIds[curIndex + move]
         orderIds[curIndex + move] = t
       }
-      
+
       group.forEach( (item, index) => {
         if (item.order_id !== orderIds[index]) {
           // console.log(item.name + " changed, fetching")
@@ -206,8 +206,9 @@ class App extends React.Component {
       })
       this.setState({ [group]: group })
     }
-  
+
     handleCreate = (content) => {
+      content['order_id']=this.state[this.state.creatingType].length
       fetch(apiURL+this.state.creatingType, {
         method: "POST",
         headers: HEADERS_AUTH,
