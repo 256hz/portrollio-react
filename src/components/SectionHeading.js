@@ -11,7 +11,7 @@ const SectionHeading = (props) => {
           <Link to="/#nav"><Icon name="triangle up"/></Link>
       </Grid.Column>
 
-      <Grid.Row className="heading-bg">
+      <Grid.Row className={`${props.user.color_theme}-heading`}>
         <Grid.Column width={2} textAlign="center" verticalAlign="middle">
           <Button.Group >
             {(props.sectionEdit && props.loggedIn && localStorage.getItem('jwt') !== '')

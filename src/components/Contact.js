@@ -20,7 +20,7 @@ const Contact = (props) => {
           <Link to="/#nav"><Icon name="triangle up"/></Link>
         </Grid.Column>
 
-        <Grid.Row className="heading-bg">
+        <Grid.Row className="theme-default-heading">
           <Grid.Column width={2} textAlign="center" verticalAlign="middle">
           </Grid.Column>
 

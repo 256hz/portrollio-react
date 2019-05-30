@@ -14,6 +14,8 @@ const Jobs = (props) => {
         loggedIn={props.loggedIn}
         sectionEdit={false}
         sectionNew={true}
+
+      user={props.user}
       />
 
       <Grid.Row columns={16} padded="horizontally" centered>

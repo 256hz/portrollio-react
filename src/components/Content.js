@@ -47,6 +47,7 @@ class Content extends Component {
             <Skills skills={this.props.skills} editing={this.props.editing}
               startEdit={this.props.startEdit} loggedIn={this.props.loggedIn}
               shiftOrder={this.props.shiftOrder} startNew={this.props.startNew}
+              user={this.props.currentUser}
             />
           </Grid.Column>
         </Grid.Row>
@@ -56,6 +57,7 @@ class Content extends Component {
             <Jobs jobs={this.props.jobs} editing={this.props.editing}
               startEdit={this.props.startEdit} loggedIn={this.props.loggedIn}
               shiftOrder={this.props.shiftOrder} startNew={this.props.startNew}
+              user={this.props.currentUser}
             />
           </Grid.Column>
         </Grid.Row>
@@ -65,6 +67,7 @@ class Content extends Component {
             <Githubs githubs={this.props.githubs} editing={this.props.editing}
               startEdit={this.props.startEdit} loggedIn={this.props.loggedIn}
               shiftOrder={this.props.shiftOrder} startNew={this.props.startNew}
+              user={this.props.currentUser}
             />
           </Grid.Column>
         </Grid.Row>
