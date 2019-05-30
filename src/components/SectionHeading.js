@@ -13,12 +13,18 @@ const SectionHeading = (props) => {
 
       <Grid.Row className="heading-bg">
         <Grid.Column width={2} textAlign="center" verticalAlign="middle">
+          <Button.Group >
             {(props.sectionEdit && props.loggedIn && localStorage.getItem('jwt') !== '')
-              ? <Button onClick={props.startEdit} icon="pencil square"/>
+              ? <Button icon onClick={props.startEdit}>
+                  <Icon name ="edit" />
+                </Button>
               : null}
               {(props.sectionNew && props.loggedIn && localStorage.getItem('jwt') !== '')
-              ? <Button onClick={props.startNew} icon="clone outline"/>
+              ? <Button icon onClick={props.startNew} >
+                  <Icon name="add circle"/>
+                </Button>
               : null}
+          </Button.Group>
         </Grid.Column>
 
         <Grid.Column width={14}>

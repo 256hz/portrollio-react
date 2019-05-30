@@ -234,7 +234,9 @@ class App extends React.Component {
         let copy = this.state[this.state.editingType]
         copy.splice(copy.findIndex(el => el.id === json.id),1)
         this.setState({
-          [this.state.editingType]: copy
+          [this.state.editingType]: copy,
+          editingType: '',
+          sidebarVisible: false
         })
       })
     }
@@ -253,7 +255,7 @@ class App extends React.Component {
                    <Icon name='bars' size="mini"/>
                    Close
                  </Menu.Item>
-                 
+
                  <Menu.Item as='a'>
                     {(this.state.loggedIn && localStorage.getItem('jwt'))
                       ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
