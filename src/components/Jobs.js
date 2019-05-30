@@ -1,7 +1,7 @@
 import React from 'react'
 import SectionHeading from './SectionHeading'
 import Job from './Job'
-import { Grid, List, Button, Icon } from 'semantic-ui-react';
+import { Grid, Card } from 'semantic-ui-react';
 
 const Jobs = (props) => {
   let jobs = props.jobs.sort( (a,b) => a.order_id - b.order_id )
@@ -16,16 +16,16 @@ const Jobs = (props) => {
         sectionNew={true}
       />
 
-
-      <Grid.Row columns={16} padded="horizontally">
-        <Grid.Column width={2}></Grid.Column>
-        <Grid.Column width={12}>
-          {jobs.map( (job,index) => <Job key={index} job={job} loggedIn={props.loggedIn}
-            shiftOrder={props.shiftOrder} startEdit={props.startEdit}/>)}
-        </Grid.Column>
-
-        <Grid.Column width={2}></Grid.Column>
-
+      <Grid.Row columns={16} padded="horizontally" centered>
+      <Grid.Column width={2} />
+      <Grid.Column width={12} >
+      <Card.Group itemsPerRow={1}>
+        {jobs.map( (job,index) => 
+          <Job key={job.company + index} job={job} loggedIn={props.loggedIn}
+                shiftOrder={props.shiftOrder} startEdit={props.startEdit}/>)}
+      </Card.Group>
+      </Grid.Column>
+      <Grid.Column width={2} />
       </Grid.Row>
     </Grid>
   )

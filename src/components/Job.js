@@ -1,45 +1,50 @@
 import React from 'react'
-import { Grid, List, Button, Icon } from 'semantic-ui-react';
+import { Card, List, Button, Grid, Image } from 'semantic-ui-react';
 
 const Job = (props) => {
   return(
-
-    <Grid key={props.job.company}>
-
-    <Grid.Row key={props.job.title} width={12} padded="vertically">
-      {props.loggedIn
-        ? <Button onClick={_ => props.startEdit(props.job, 'jobs')} icon="pencil square"/>
-        : null}
-        <Grid.Column width={2} className="image-circle-small-job" verticalAlign="middle">
-            <img className="image-circle-small-img" src={props.job.img_url} alt={props.job.company} />
-        </Grid.Column>
-
-        <Grid.Column width={6}>
-            <Grid.Row className="font-heading font-size-large">{props.job.title}</Grid.Row>
-            <Grid.Row className="font-heading font-size-medium">{props.job.company}</Grid.Row>
-            <Grid.Row className="font-heading font-size-small">
-                {props.job.start_month} {props.job.start_year} - {props.job.end_month}
+        <Card raised>
+            <Card.Content>
+              <Image spaced floated="left" size="tiny" src={props.job.img_url} alt={props.job.company}/>
+              <Card.Header><span>{' '}</span></Card.Header>
+              <Card.Header>{props.job.title}</Card.Header>
+              <Card.Meta>{props.job.company}</Card.Meta>
+              <Card.Meta>{props.job.start_month} {props.job.start_year} - {props.job.end_month}
                 {' '}{props.job.end_year ? props.job.end_year : 'Present'}
-            </Grid.Row>
-        </Grid.Column>
-      </Grid.Row>
-
-      <Grid.Row className="font_size_medium">{props.job.summary}</Grid.Row>
-      <Grid.Row width={1}>
-          <List bulleted>
-          {props.job.responsibilities.map(res => {
-              return <List.Item key={res} className="font_size_small">{res}</List.Item>
-            })}
-          </List>
-          {props.loggedIn
-            ? <Button type="button" onClick={_ => props.shiftOrder('jobs', props.job, false)}><Icon name="up arrow"/></Button>
+              </Card.Meta>
+            </Card.Content>
+          <Card.Content>
+            <Card.Description>{props.job.summary}</Card.Description>
+          </Card.Content>
+          <Card.Content>
+            <Card.Meta>SKILLS USED</Card.Meta>
+            <Card.Description>
+              <List bulleted>
+                {props.job.skills_used.map(skill => {
+                    return <List.Item key={skill} className="font_size_small">{skill}</List.Item>
+                  })}
+              </List>
+            </Card.Description>
+          </Card.Content>
+          <Card.Content>
+          <Card.Meta>RESPONSIBILITIES</Card.Meta>
+            <Card.Description>
+              <List bulleted>
+                {props.job.responsibilities.map(res => {
+                    return <List.Item key={res} className="font_size_small">{res}</List.Item>
+                  })}
+              </List>
+            </Card.Description>
+          </Card.Content>
+          {props.loggedIn ?
+            <Card.Content extra>
+              <Button onClick={_ => props.startEdit(props.job, 'jobs')} icon="pencil square"/>
+              <Button type="button" onClick={_ => props.shiftOrder('jobs', props.job, false)} icon="up arrow"/>
+              <Button type="button" onClick={_ => props.shiftOrder('jobs', props.job, true)} icon="down arrow"/>
+            </Card.Content>
             : null}
-          {props.loggedIn
-            ? <Button type="button" onClick={_ => props.shiftOrder('jobs', props.job, true)}><Icon name="down arrow"/></Button>
-            : null}
-      </Grid.Row>
-    </Grid>
-  )
+        </Card>
+    )
 }
 
 export default Job
