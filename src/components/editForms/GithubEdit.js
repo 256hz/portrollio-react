@@ -52,6 +52,7 @@ export default class GithubEdit extends Component {
         </Form.Field>
 
         <Button type='submit'>Submit</Button>
+        <Button negative type="button" onClick={() => this.props.handleDelete(this.state.content)}>Delete</Button>
       </Form>
     )
   }

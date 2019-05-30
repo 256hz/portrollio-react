@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { Icon, Menu, Segment, Sidebar, Sticky } from 'semantic-ui-react'
+import { Icon, Menu, Segment, Sidebar, Sticky, Divider } from 'semantic-ui-react'
 import Content from './components/Content'
 import Login from './components/Login'
 import LoggedIn from './components/LoggedIn'
@@ -62,7 +62,10 @@ class App extends React.Component {
     }
 
     openSidebar = () => {
-      this.setState({sidebarVisible: !this.state.sidebarVisible})
+      this.setState({
+        sidebarVisible: !this.state.sidebarVisible,
+        editingType: ''
+      })
     }
 
     login = (ev, username, password) => {
@@ -151,7 +154,6 @@ class App extends React.Component {
               users: [json],
               currentUser: json,
               sidebarVisible: false,
-              editorDisabled: true,
               editingType: '',
             })
             break
@@ -160,7 +162,7 @@ class App extends React.Component {
               return (skill.id === content.id) ? content : skill
             })
             this.setState({
-              skills: skillsCopy,
+              skills: skillsCopy
             })
             break
           case "jobs":
@@ -194,7 +196,6 @@ class App extends React.Component {
 
     handleCreate = (content) => {
       let token = localStorage.getItem('jwt')
-      console.log(this.state.currentUser.id);
       fetch('http://localhost:3000/api/v1/'+this.state.creatingType, {
         method: "POST",
         headers: {
@@ -210,25 +211,31 @@ class App extends React.Component {
       .catch(error => console.log(error))
       .then(json => {
         let creatingTypeCopy=this.state.creatingType
-        switch(creatingTypeCopy) {
-          case "skills":
-            this.setState({
-              skills: [
-                ...this.state.skills,
-                json
-              ]
-            })
-            break
-          case "jobs":
-            console.log('here');
-            this.setState({
-              jobs: [
-                ...this.state.jobs,
-                json
-              ]
-            })
-            break
+        this.setState({
+          [creatingTypeCopy]: [
+            ...this.state[creatingTypeCopy],
+            json
+          ],
+          creatingType: ''
+        })
+      })
+    }
+
+    handleDelete = (content) => {
+      let token = localStorage.getItem('jwt')
+      fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
+        method: "DELETE",
+        headers: {
+          'Authorization': 'Bearer ' + token
         }
+      })
+      .then(res => res.json())
+      .then(json => {
+        let copy = this.state[this.state.editingType]
+        copy.splice(copy.findIndex(el => el.id === json.id),1)
+        this.setState({
+          [this.state.editingType]: copy
+        })
       })
     }
 
@@ -246,6 +253,7 @@ class App extends React.Component {
                    <Icon name='bars' size="mini"/>
                    Close
                  </Menu.Item>
+                 
                  <Menu.Item as='a'>
                     {(this.state.loggedIn && localStorage.getItem('jwt'))
                       ? <LoggedIn username={this.state.username} logOut={this.logOut}/>
@@ -262,6 +270,7 @@ class App extends React.Component {
                   handleCreate={this.handleCreate}
                   editingType={this.state.editingType}
                   startEdit={this.startEdit}
+                  handleDelete={this.handleDelete}
                  />
 
                </Sidebar>
