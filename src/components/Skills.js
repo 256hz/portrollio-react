@@ -23,7 +23,7 @@ const Skills = (props) => {
           return( <Grid.Column key={skill.name}>
             <Grid.Row>
               {props.loggedIn 
-                ? <Button type="button" onClick={_ => props.shiftOrder(skill, false)}><Icon name="left arrow"/></Button>
+                ? <Button type="button" onClick={_ => props.shiftOrder('skills', skill, false)}><Icon name="left arrow"/></Button>
                 : null}
               <Popup key={skill.name} header={skill.name}
                 trigger={
@@ -34,7 +34,7 @@ const Skills = (props) => {
               />
             </Grid.Row>
               {props.loggedIn 
-                ? <Button type="button" onClick={_ => props.shiftOrder(skill, true)}><Icon name="right arrow"/></Button>
+                ? <Button type="button" onClick={_ => props.shiftOrder('skills', skill, true)}><Icon name="right arrow"/></Button>
                 : null}
           </Grid.Column>
         )})}
