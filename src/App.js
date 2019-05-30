@@ -5,7 +5,13 @@ import Content from './components/Content'
 import Login from './components/Login'
 import LoggedIn from './components/LoggedIn'
 import Editor from './components/Editor'
+
 const apiURL = 'http://localhost:3000/api/v1/'
+const HEADERS_AUTH = {
+  'Authorization': 'Bearer ' + localStorage.jwt,
+  'Content-Type': 'application/json'
+}
+const HEADERS_NOAUTH = { 'Content-Type': 'application/json'}
 
 const DEFAULT_STATE = {
   jobs: [],
@@ -23,7 +29,6 @@ const DEFAULT_STATE = {
   editorDisabled: true,
   editing: {},
   editingType: '',
-
   creating: {},
   creatingType: ''
 }
@@ -48,13 +53,11 @@ class App extends React.Component {
       }
       //automated fetch
       anchors.forEach( a => {
-        fetch( apiURL + a )
-        .then( res => res.json() )
+        fetch( apiURL + a ).then( res => res.json() )
         .then( json => this.setState({[a]: json}))
       })
       //special fetch for users
-      fetch( apiURL + 'users')
-      .then( res => res.json() )
+      fetch( apiURL + 'users').then( res => res.json() )
       .then( users => {
         this.setState({users})
         this.setState({currentUser: users[0]})
@@ -71,24 +74,22 @@ class App extends React.Component {
     login = (ev, username, password) => {
       ev.preventDefault()
       this.setState({message: ''})
-      fetch('http://localhost:3000/api/v1/login', {
+      fetch(apiURL + 'login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: HEADERS_NOAUTH,
         body: JSON.stringify({ user: {username, password}})
       }).then( res => res.json() )
         .then( json => {
-          // console.log('returned:', json)
           if (json && json.jwt) {
             localStorage.setItem('jwt', json.jwt)
             localStorage.setItem('username', username)
             this.setState({username: username, loggedIn: true})
           } else {
             localStorage.removeItem('jwt')
-            localStorage.setItem('username', username)
+            localStorage.removeItem('username')
             this.setState({username: '', message: json.message, loggedIn: false})
           }
+          this.setState({sidebarVisible: false})
         })
   }
 
@@ -126,82 +127,90 @@ class App extends React.Component {
           },
           creatingType: type,
           sidebarVisible: true
-        }, ()=>console.log('set up new', this.state.creatingType))
+        }) //, ()=>console.log('set up new', this.state.creatingType))
       } else {
         alert('Please log in to add ' + this.state.creatingType)
       }
     }
 
     handleSubmit = (content) => {
-      let token = localStorage.getItem('jwt')
-      fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
+      fetch(apiURL+this.state.editingType+'/'+content.id, {
         method: "PATCH",
-        headers: {
-          'Authorization': 'Bearer ' + token,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          ...content
-        })
+        headers: HEADERS_AUTH,
+        body: JSON.stringify({...content})
       })
       .then(res => res.json())
       .catch(error => console.log(error))
       .then(json => {
         let editingTypeCopy=this.state.editingType
         switch(editingTypeCopy) {
-          case "users":
-            this.setState({
-              users: [json],
-              currentUser: json,
-              sidebarVisible: false,
-              editingType: '',
-            })
+          case "users": this.setState({users: [json], currentUser: json})            
             break
-          case "skills":
-            let skillsCopy = this.state.skills.map(skill => {
+          case "skills": let skillsCopy = this.state.skills.map(skill => {
               return (skill.id === content.id) ? content : skill
             })
-            this.setState({
-              skills: skillsCopy
-            })
+            this.setState({skills: skillsCopy})
             break
-          case "jobs":
-            let jobsCopy = this.state.jobs.map(job => {
+          case "jobs": let jobsCopy = this.state.jobs.map(job => {
               return (job.id === content.id) ? content : job
             })
-            this.setState({
-              jobs: jobsCopy,
-              sidebarVisible: false,
-              editingType: '',
-            })
+            this.setState({jobs: jobsCopy})
             break
-          case "githubs":
-            let githubsCopy = this.state.githubs.map(github => {
+          case "githubs": let githubsCopy = this.state.githubs.map(github => {
               return (github.id === content.id) ? content : github
             })
-            this.setState({
-              githubs: githubsCopy,
-              sidebarVisible: false,
-              editingType: '',
-            })
+            this.setState({githubs: githubsCopy}) 
             break
-          default:
-            this.setState({
-              sidebarVisible: false,
-              editingType: '',
-          })
+          default: return null
         }
+        this.setState({sidebarVisible: false, editingType: ''})
       })
     }
 
+    shiftOrder = (incomingGroup, item, next) => {
+      let group = this.state[incomingGroup].sort( (a,b) => a.order_id - b.order_id )
+      let orderIds = group.map( s => s.order_id )
+      let curIndex = orderIds.indexOf( item.order_id )
+      let maxPos = orderIds.length-1
+      let move = next ? 1 : -1 //if next is true, shift up; else shift down 
+
+      // console.log('shifting:', {incomingGroup, item, next})
+      // console.log('to order_id:', item.order_id + move)
+      // console.log({group, orderIds})
+
+      if (curIndex === maxPos && next) {
+        let t = orderIds[maxPos]
+        orderIds[maxPos] = orderIds[0]
+        orderIds[0] = t
+      } else if (curIndex === 0 && !next) {
+        let t = orderIds[0]
+        orderIds[0] = orderIds[maxPos]
+        orderIds[maxPos] = t
+      } else {
+        let t = orderIds[curIndex]
+        orderIds[curIndex] = orderIds[curIndex + move]
+        orderIds[curIndex + move] = t
+      }
+      
+      group.forEach( (item, index) => {
+        if (item.order_id !== orderIds[index]) {
+          // console.log(item.name + " changed, fetching")
+          item.order_id = orderIds[index]
+          fetch(apiURL + '/' + incomingGroup + '/'+ item.id, {
+            method: "PATCH",
+            headers: HEADERS_AUTH,
+            body: JSON.stringify({...item})
+          }).then( res => res.json() )
+            .then( console.log )
+        }
+      })
+      this.setState({ [group]: group })
+    }
+  
     handleCreate = (content) => {
-      let token = localStorage.getItem('jwt')
-      fetch('http://localhost:3000/api/v1/'+this.state.creatingType, {
+      fetch(apiURL+this.state.creatingType, {
         method: "POST",
-        headers: {
-          'Authorization': 'Bearer ' + token,
-          'Content-Type': 'application/json'
-        },
+        headers: HEADERS_AUTH,
         body: JSON.stringify({
           ...content,
           user_id: this.state.currentUser.id
@@ -212,22 +221,16 @@ class App extends React.Component {
       .then(json => {
         let creatingTypeCopy=this.state.creatingType
         this.setState({
-          [creatingTypeCopy]: [
-            ...this.state[creatingTypeCopy],
-            json
-          ],
+          [creatingTypeCopy]: [...this.state[creatingTypeCopy], json],
           creatingType: ''
         })
       })
     }
 
     handleDelete = (content) => {
-      let token = localStorage.getItem('jwt')
-      fetch('http://localhost:3000/api/v1/'+this.state.editingType+'/'+content.id, {
+      fetch(apiURL+this.state.editingType+'/'+content.id, {
         method: "DELETE",
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
+        headers: HEADERS_AUTH
       })
       .then(res => res.json())
       .then(json => {
@@ -283,8 +286,8 @@ class App extends React.Component {
                 <Content
                   openSidebar={this.openSidebar}
                   startEdit={this.startEdit}
+                  shiftOrder={this.shiftOrder}
                   startNew={this.startNew}
-
                   jobs={this.state.jobs}
                   githubs={this.state.githubs}
                   interests={this.state.interests}
