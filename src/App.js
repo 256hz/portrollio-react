@@ -89,6 +89,7 @@ class App extends React.Component {
             localStorage.removeItem('username')
             this.setState({username: '', message: json.message, loggedIn: false})
           }
+          this.setState({sidebarVisible: false})
         })
   }
 
@@ -166,22 +167,26 @@ class App extends React.Component {
       })
     }
 
-    shiftOrder = (incomingGroup, item, right) => {
+    shiftOrder = (incomingGroup, item, next) => {
       let group = this.state[incomingGroup].sort( (a,b) => a.order_id - b.order_id )
       let orderIds = group.map( s => s.order_id )
       let curIndex = orderIds.indexOf( item.order_id )
       let maxPos = orderIds.length-1
+      let move = next ? 1 : -1 //if next is true, shift up; else shift down 
 
-      if (curIndex === maxPos && right) {
+      // console.log('shifting:', {incomingGroup, item, next})
+      // console.log('to order_id:', item.order_id + move)
+      // console.log({group, orderIds})
+
+      if (curIndex === maxPos && next) {
         let t = orderIds[maxPos]
         orderIds[maxPos] = orderIds[0]
         orderIds[0] = t
-      } else if (curIndex === 0 && !right) {
+      } else if (curIndex === 0 && !next) {
         let t = orderIds[0]
         orderIds[0] = orderIds[maxPos]
         orderIds[maxPos] = t
       } else {
-        right ? let move = 1 : let move = -1 //if right is true, shift up; else shift down 
         let t = orderIds[curIndex]
         orderIds[curIndex] = orderIds[curIndex + move]
         orderIds[curIndex + move] = t
@@ -189,6 +194,7 @@ class App extends React.Component {
       
       group.forEach( (item, index) => {
         if (item.order_id !== orderIds[index]) {
+          // console.log(item.name + " changed, fetching")
           item.order_id = orderIds[index]
           fetch(apiURL + '/' + incomingGroup + '/'+ item.id, {
             method: "PATCH",
@@ -202,7 +208,6 @@ class App extends React.Component {
     }
   
     handleCreate = (content) => {
-      let token = localStorage.getItem('jwt')
       fetch(apiURL+this.state.creatingType, {
         method: "POST",
         headers: HEADERS_AUTH,
@@ -223,7 +228,6 @@ class App extends React.Component {
     }
 
     handleDelete = (content) => {
-      let token = localStorage.getItem('jwt')
       fetch(apiURL+this.state.editingType+'/'+content.id, {
         method: "DELETE",
         headers: HEADERS_AUTH
