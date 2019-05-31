@@ -1,14 +1,15 @@
 import React from 'react'
-import {Grid, Popup, Image, Button, Icon} from 'semantic-ui-react'
+import {Grid, Popup, Image, Button, Divider} from 'semantic-ui-react'
 import SectionHeading from './SectionHeading'
 
 const Skills = (props) => {
   let skills = props.skills.sort( (a,b) => a.order_id - b.order_id )
-
+  let columns=1
+  props.loggedIn ? columns = skills.length*2+3 : columns = skills.length + 2
   return (
   <Grid columns='equal'>
     <SectionHeading text="Primary Skillsets"
-      startEdit={_ => props.startEdit(props.skills, 'skills')}
+      startEdit={_ => props.startEdit(skills, 'skills')}
       startNew={_ => props.startNew('skills')}
       editing={props.editing}
       loggedIn={props.loggedIn}
@@ -16,34 +17,35 @@ const Skills = (props) => {
       sectionNew={true}
       user={props.user}
     />
-      <Grid.Row columns={props.skills.length*2} padded="horizontally"
-          verticalAlign="middle" textAlign="center">
-        <Grid.Column width={2}></Grid.Column>
-
-        {skills.map( skill => {
-          return( <Grid.Column key={skill.name}>
-            <Grid.Row>
-              {props.loggedIn
-                ? <Button type="button" onClick={_ => props.shiftOrder('skills', skill, false)}><Icon name="left arrow"/></Button>
+    <Grid.Row columns={columns} verticalAlign="middle" textAlign="center">
+      <Grid.Column>{' '}</Grid.Column>
+      {skills.map( (skill, index) => {
+        return(<> 
+              {props.loggedIn && index === 0
+                ? <Grid.Column textAlign="center"><Button type="button" onClick={_ => props.shiftOrder('skills', skill, false)} circular icon="long arrow alternate left"/></Grid.Column>
                 : null}
-              <Popup key={skill.name} header={skill.name}
+              <Grid.Column textAlign="center">
+              <Popup key={skill.name} header={skill.name} textAlign="center"
                 trigger={
                   <Image src={skill.img_url} className="image-circle-small-skill"
                   verticalAlign="middle" size="tiny" circular/>
                 }
                 position="bottom center"
               />
-            </Grid.Row>
-              {props.loggedIn
-                ? <Button type="button" onClick={_ => props.shiftOrder('skills', skill, true)}><Icon name="right arrow"/></Button>
-                : null}
-          </Grid.Column>
-        )})}
-
-        <Grid.Column width={2}></Grid.Column>
-      </Grid.Row>
+              </Grid.Column>
+              {props.loggedIn && index < skills.length -1
+                ? <Grid.Column textAlign="center"><Button type="button" onClick={_ => props.shiftOrder('skills', skill, true)} circular icon="arrows alternate horizontal"/></Grid.Column>
+                : null
+              }
+              {props.loggedIn && index === skills.length -1
+                ? <Grid.Column textAlign="center"><Button type="button" onClick={_ => props.shiftOrder('skills', skill, true)} circular icon="long arrow alternate right"/></Grid.Column>
+                : null
+              }
+        </>)
+      })}
+      <Grid.Column>{' '}</Grid.Column>
+    </Grid.Row>
     <br />
-
   </Grid>
   )
 }

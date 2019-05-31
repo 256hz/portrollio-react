@@ -86,37 +86,3 @@ class Content extends Component {
 }
 
 export default Content;
-
-
-// visible: [
-//   <Nav user={this.props.currentUser} />,
-//   <NamePicIntro user={this.props.currentUser} />,
-//   <AboutMe user={this.props.currentUser} />,
-//   <Jobs jobs={this.props.jobs} />,
-//   <Githubs githubs={this.props.githubs} />,
-//   <Interests interests={this.props.interests}/>,
-//   <Skills skills={this.props.skills} />,
-//   <Honors honors={this.props.honors} />,
-//   <Links links={this.props.links} />,
-//   <Contact user={this.props.currentUser} />,
-// ]
-
-// const SECTIONS = [
-//   {nav:  [<Nav openSidebar={this.props.openSidebar}/>]},
-//   {name: [<NamePicIntro user={this.props.currentUser}/>]},
-//   {about:[<AboutMe user={this.props.currentUser} />,
-//           <Skills skills={this.props.skills} />]},
-//   {jobs: [<Jobs jobs={this.props.jobs} />]},
-//   {githubs: [<Githubs githubs={this.props.githubs}/>]},
-//   {contact: [<Contact user={this.props.currentUser}/>]}
-// ]
-
-// {SECTIONS.map( section => {
-//   return <Grid.Row>
-//     <Grid.Column>
-//       {section.map (component => {
-//         return React.createElement(Object.values(component)[0], {})
-//       })}
-//     </Grid.Column>
-//   </Grid.Row>
-// })}
