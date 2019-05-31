@@ -13,21 +13,17 @@ const SectionHeading = (props) => {
 
       <Grid.Row className={`${props.user.color_theme}-heading`}>
         <Grid.Column width={2} textAlign="center" verticalAlign="middle">
-          <Button.Group >
+          <Button.Group verticalAlign="middle">
             {(props.sectionEdit && props.loggedIn && localStorage.getItem('jwt') !== '')
-              ? <Button icon onClick={props.startEdit}>
-                  <Icon name ="edit" />
-                </Button>
+              ? <Button icon="edit" onClick={props.startEdit}/>
               : null}
-              {(props.sectionNew && props.loggedIn && localStorage.getItem('jwt') !== '')
-              ? <Button icon onClick={props.startNew} >
-                  <Icon name="add circle"/>
-                </Button>
+            {(props.sectionNew && props.loggedIn && localStorage.getItem('jwt') !== '')
+              ? <Button icon="add circle" onClick={props.startNew}/>
               : null}
           </Button.Group>
         </Grid.Column>
 
-        <Grid.Column width={14}>
+        <Grid.Column width={14} verticalAlign="middle">
           <div>
             <span className="font-size-large heading-font">{props.text}</span>
           </div>
@@ -42,7 +38,3 @@ const SectionHeading = (props) => {
   }
 
 export default SectionHeading
-        // <Grid.Row className="heading-font font-size-large">
-        //     <br />
-        //     {props.text}
-        // </Grid.Row>

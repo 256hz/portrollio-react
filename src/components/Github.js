@@ -10,7 +10,7 @@ const Github = (props) => {
   let github = props.github
   let _name = fancyName(github.repo_name)
   return (
-  <Card >
+  <Card raised className="corner-sharp">
     <Card.Content href={`https://github.com/${github.repo_owner}/${github.repo_name}`}
         target="_blank" className="card-height">
 

@@ -3,7 +3,7 @@ import { Card, List, Button, Grid, Image } from 'semantic-ui-react';
 
 const Job = (props) => {
   return(
-        <Card raised>
+        <Card raised className="corner-sharp">
           <Card.Content>
             <Image spaced floated="left" size="tiny" src={props.job.img_url} alt={props.job.company}/>
             <Card.Header>   {props.job.title}     </Card.Header>
@@ -30,8 +30,8 @@ const Job = (props) => {
           <Card.Meta>         RESPONSIBILITIES      </Card.Meta>
             <Card.Description>
               <List bulleted>
-                {props.job.responsibilities.map(res => {
-                    return <List.Item key={res} className="font_size_small">{res}</List.Item>
+                {props.job.responsibilities.map( (res, index) => {
+                    return <List.Item key={res + index} className="font_size_small">{res}</List.Item>
                   })}
               </List>
             </Card.Description>
